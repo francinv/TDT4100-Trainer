@@ -10,23 +10,27 @@ import java.util.Scanner;
 import core.Userprofile;
 import core.Workout;
 
-public class UserDataPersistence implements filePersistence {
+public class UserProfilePersistence implements filePersistence {
 	
 private Userprofile user;
+private String file;
 	
-	public UserDataPersistence() {
+	public UserProfilePersistence(String file) {
+		this.file = file;
 	}
 	
-	public UserDataPersistence(Userprofile user) {
-		this.user=user;
+	public UserProfilePersistence(Userprofile user, String file) {
+		this.user = user;
+		this.file = file;
 	}
 
 	@Override
-	public void readFile() {
+	public void readFile(String file) {
 		Scanner in;
+		System.out.println("Trying to read file");
         try
         {
-            in = new Scanner(new FileReader("test.txt"));
+            in = new Scanner(new FileReader(file));
              
             while(in.hasNext()){
                 String line = in.nextLine();
@@ -34,6 +38,7 @@ private Userprofile user;
             }
              
             in.close();
+            System.out.println("Reading finished");
         }
         catch (FileNotFoundException e)
         {
@@ -45,10 +50,10 @@ private Userprofile user;
 
 	@Override
 	public void writeFile() {
-		System.out.println("Trying");
+		System.out.println("Trying to write file");
 		  try
 	        {
-	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/userData.txt");
+	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/userProfiles.txt");
 	            outFile.println(user);
 	            outFile.close();
 	            System.out.println("Done");
@@ -63,24 +68,25 @@ private Userprofile user;
 	}
 	
 	public static void main(String[] args) {
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
+		String file = "src/main/java/workoutplanner/persistence/userProfiles.txt";
 		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevin@mail.com","1234","15/04/1998"
+				"kevinco@ntnu.no","123","15/04/1998"
 				,'M');
-		Userprofile anoj = new Userprofile("Francin", "Vincent",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile kavu = new Userprofile("Kavusikan", "Sivasub",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		List<Userprofile>trainers = Arrays.asList(anoj,kavu);
-		Workout workout = new Workout(kevinco,"død",
+		UserProfilePersistence up = new UserProfilePersistence(kevinco, file);
+		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
+		Workout workout = new Workout(kevinco,"Idag skal jeg dø",
 				7, gainz, "02-02-21",
 				"Strength","push",2 ,
-				"Du skal svette",trainers);
-		WorkoutPersistence wp = new WorkoutPersistence(workout);
-		wp.writeFile();
+				"Du skal svette");
+		Workout workout2 = new Workout(kevinco,"RIP",
+				7, gainz, "02-02-21",
+				"Strength","push",2 ,
+				"Du skal svette");
+		kevinco.addMyWorkouts(workout);
+		kevinco.addMyWorkouts(workout2);
+		up.writeFile();
+		up.readFile(file); 
+		System.out.println(kevinco.getMyWorkouts());
 	}
 
 }
-
