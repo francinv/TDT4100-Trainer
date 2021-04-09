@@ -1,4 +1,4 @@
-package core;
+package src.main.java.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class Workout {
+import main.java.workoutplanner.core.Userprofile;
 
+public class Workout {
+	
 	private String name;
 	private String uniqueID = UUID.randomUUID().toString();
 	private int amountOfExercises;
@@ -180,6 +182,7 @@ public class Workout {
 		};
 		return 
 				"Name of workout: "+ name +  "\n" +
+				"Workout ID: "+ uniqueID + "\n"+
 				"By: " + createdBy.getName() +"\n" +
 				"When: "+ when + "\n" +
 				"Duration: "+ duration + " hours\n" +
@@ -215,5 +218,5 @@ public class Workout {
 		System.out.println(workout.getUniqueID());
 	
 	}
-
+	
 }

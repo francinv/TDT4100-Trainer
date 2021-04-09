@@ -3,28 +3,30 @@ package src.main.java.persistence;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
 import main.java.workoutplanner.core.Userprofile;
 import main.java.workoutplanner.core.Workout;
 
-public class WorkoutPersistence implements filePersistence{
+public class allWorkoutsPersistence implements filePersistence {
 	
-	private Workout workout;
+	private Collection<Workout> workouts = new ArrayList<Workout>();
 	private String file;
 	
-	//"src/main/java/workoutplanner/persistence/workout.txt"
-	
-	public WorkoutPersistence() {
+	public allWorkoutsPersistence(String file) {
+		this.file=file;
 	}
 	
-	public WorkoutPersistence(Workout workout, String file) {
-		this.workout = workout;
-		this.file = file;
+	public allWorkoutsPersistence(String file, Collection<Workout> workouts) {
+		this.file=file;
+		this.workouts = workouts;
 	}
-
+		
+	
 	@Override
 	public void readFile(String file) {
 		Scanner in;
@@ -55,7 +57,7 @@ public class WorkoutPersistence implements filePersistence{
 		  try
 	        {
 	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/workout.txt");
-	            outFile.println(workout);
+	            outFile.println(workouts);
 	            outFile.close();
 	            System.out.println("Done");
 	        }
@@ -89,9 +91,6 @@ public class WorkoutPersistence implements filePersistence{
         }
 		
 	}
-		  
-	
-	   
 	
 	public static void main(String[] args) {
 		String file = "src/main/java/workoutplanner/persistence/workout.txt";
@@ -114,11 +113,10 @@ public class WorkoutPersistence implements filePersistence{
 				5, gainz, "04-02-21",
 				"Strength","pull",2 ,
 				"Du skal svette");
-		WorkoutPersistence wp = new WorkoutPersistence(workout, file);
-		WorkoutPersistence wp2 = new WorkoutPersistence(workout, file);
+		Collection<Workout>workouts = Arrays.asList(workout,workout2);
+		allWorkoutsPersistence wp = new allWorkoutsPersistence(file,workouts);
 		wp.writeFile();
 		wp.readFile(file);
-		wp2.writeFile();
 	}
 
 }
