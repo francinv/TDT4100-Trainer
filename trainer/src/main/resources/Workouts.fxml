@@ -6,6 +6,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections ?>
+<?import java.lang.String?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.WorkoutListController">
    <children>
@@ -20,6 +22,13 @@
       <ListView fx:id="listview_workouts" layoutX="53.0" layoutY="87.0" onMouseClicked="#WorkoutDetail" prefHeight="202.0" prefWidth="347.0">
       </ListView>
       <ComboBox fx:id="filter_type" layoutX="423.0" layoutY="122.0" onAction="#filter" prefWidth="150.0" promptText="Show only">
+      	<items>
+      		<FXCollections fx:factory="observableArrayList">
+      			<String fx:value="Strength"/>
+      			<String fx:value="Hypothrapy"/>
+      			<String fx:value="Endurance"/>
+      		</FXCollections>
+      	</items>
       </ComboBox>
    </children>
 </AnchorPane>

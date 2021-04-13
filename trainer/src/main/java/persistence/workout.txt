@@ -1,0 +1,11 @@
+WorkoutID: 975eedb1-ed4a-454c-94e9-88af0706ab23
+Name of workout: Hello
+When: 2021-04-15
+Duration: 2-3 hrs hours
+Type of workout: Strength
+Category: [Push, Legs]
+Muscles trained: [Chest, Triceps, Back, Legs]
+Number of excercises: 19
+Description: fjdfj dfjdsjfjf
+
+

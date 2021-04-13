@@ -31,8 +31,9 @@ public class WorkoutListController {
 		
 	}
 	
+	@FXML
 	private void LogoutAction(ActionEvent event) {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("login.fxml"));
 		try {
 			Parent root = (Parent) fxmlLoader.load();
 			Stage stg = new Stage();
@@ -47,6 +48,7 @@ public class WorkoutListController {
 
 	}
 	
+	@FXML
 	private void CreateWorkoutAction(ActionEvent event) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("createnewworkout.fxml"));
 		try {
@@ -62,6 +64,7 @@ public class WorkoutListController {
 		}
 	}
 	
+	@FXML
 	private void GoToProfile(ActionEvent event) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("profile.fxml"));
 		try {
@@ -78,10 +81,15 @@ public class WorkoutListController {
 		}
 	}
 	
+	@FXML
 	private void WorkoutDetail(MouseEvent arg0) {
 		System.out.println("Her kommer alle workouts.");
 	}
 	
-	private void filter(ActionEvent event)
+	@FXML
+	private void filter(ActionEvent event) {
+		System.out.println("Sort");
+	}
+	
 }
 

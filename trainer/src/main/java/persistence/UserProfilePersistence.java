@@ -53,7 +53,7 @@ private String file;
 		System.out.println("Trying to write file");
 		  try
 	        {
-	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/userProfiles.txt");
+	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/userProfiles.txt");
 	            outFile.println(user);
 	            outFile.close();
 	            System.out.println("Done");
@@ -68,7 +68,7 @@ private String file;
 	}
 	
 	public static void main(String[] args) {
-		String file = "src/main/java/workoutplanner/persistence/userProfiles.txt";
+		String file = "src/main/java/persistence/userProfiles.txt";
 		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
 				"kevinco@ntnu.no","123","15/04/1998"
 				,'M');

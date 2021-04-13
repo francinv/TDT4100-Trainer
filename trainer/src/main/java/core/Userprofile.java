@@ -20,8 +20,26 @@ public class Userprofile {
 	private Collection<Workout>myWorkouts = new ArrayList<Workout>();
 	
 	public Userprofile(String firstName, String lastName, String email, String password,
-		String birthday, char gender) {	
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		LocalDate birthday, char gender) {	
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.birthday = birthday;
+		this.gender = gender;
+		
+	}
+	
+	public Userprofile(String firstName, String lastName, String email, String password,
+			LocalDate birthday, char gender, Collection<Workout> myWorkout) {
+		this(firstName, lastName, email, password, birthday, gender);
+		this.myWorkouts=myWorkout;
+	}
+	
+	public Userprofile(String firstName, String lastName, String email, String password, String birthday,
+			char gender) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,16 +47,9 @@ public class Userprofile {
 		this.password = password;
 		this.birthday = LocalDate.parse(birthday, formatter);
 		this.gender = gender;
-		Integer num = 1;
-		String username = firstName.substring(0, 2) + lastName.substring(0,2) + num.toString();
+		
 	}
-	
-	public Userprofile(String firstName, String lastName, String email, String password,
-			String birthday, char gender, Collection<Workout> myWorkout) {
-		this(firstName, lastName, email, password, birthday, gender);
-		this.myWorkouts=myWorkout;
-	}
-	
+
 	public String getName() {
 		return firstName + " " + lastName;
 	}
@@ -134,10 +145,11 @@ public class Userprofile {
 		for (Workout workout : myWorkouts) {
 			workoutNames.add(workout.getName());
 		}
-		return "Navn: " + firstName +" " +lastName + "\n" 
+		return "Navn: " + firstName + " " +lastName + "\n" 
 				+ "birthday: "+ birthday + "\n" 
 				+ "gender: " + gender + "\n"
 				+ "email: " + email + "\n"
+				+ "password: " + password + "\n"
 				+ "Workouts: " + workoutNames + "\n\n";
 	}
 	

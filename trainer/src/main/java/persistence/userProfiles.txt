@@ -1,0 +1,7 @@
+Navn: Kevin Cornolis
+birthday: 1998-04-15
+gender: M
+email: kevinco@ntnu.no
+Workouts: [Idag skal jeg dø, RIP]
+
+

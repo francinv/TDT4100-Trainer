@@ -1,19 +1,27 @@
 package persistence;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import core.Userprofile;
 import core.Workout;
 
 public class UsersPersistence implements filePersistence {
-	
+
+public ArrayList<String> list = new ArrayList<String>();
 private Collection<Userprofile> allUsers = new ArrayList<Userprofile>();
 private String file;
 	
@@ -33,12 +41,14 @@ private String file;
         try
         {
             in = new Scanner(new FileReader(file));
+            
              
             while(in.hasNext()){
-                String line = in.nextLine();
-                System.out.println(line);
+            	list.add(in.next());
+                //String line = in.nextLine();
+                
             }
-             
+            System.out.println(list);
             in.close();
             System.out.println("Reading finished");
         }
@@ -55,7 +65,7 @@ private String file;
 		System.out.println("Trying to write file");
 		  try
 	        {
-	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/allUsers.txt");
+	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/allUsers.txt");
 	            outFile.println(allUsers);
 	            outFile.close();
 	            System.out.println("Done");
@@ -70,7 +80,7 @@ private String file;
 	}
 	
 	public static void main(String[] args) {
-		String file = "src/main/java/workoutplanner/persistence/allUsers.txt";
+		String file = "src/main/java/persistence/allUsers.txt";
 		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
 				"kevinco@ntnu.no","123","15/04/1998"
 				,'M');

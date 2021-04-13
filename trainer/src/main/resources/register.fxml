@@ -11,30 +11,30 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RegisterController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="714.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="234.0" layoutY="51.0" text="Register Trainer">
+            <Label fx:id="title_label" layoutX="234.0" layoutY="51.0" text="Register Trainer">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="firstnameregister" id="firstnameregister" layoutX="144.0" layoutY="184.0" />
-            <TextField fx:id="emailRegister" id="registeremail" layoutX="220.0" layoutY="119.0" />
-            <TextField fx:id="lastnameRegister" id="lastnameRegister" layoutX="304.0" layoutY="184.0" />
-            <PasswordField fx:id="passwordRegister" id="passwordRegister" layoutX="224.0" layoutY="305.0" />
-            <RadioButton fx:id="FemaleRegister" id="FemaleRegister" layoutX="157.0" layoutY="248.0" mnemonicParsing="false" text="F" />
-            <RadioButton fx:id="maleRegister" id="maleRegister" layoutX="207.0" layoutY="248.0" mnemonicParsing="false" text="M" />
-            <DatePicker fx:id="birthdateRegister" id="birthdateRegister" layoutX="277.0" layoutY="243.0" />
-            <Label layoutX="219.0" layoutY="102.0" text="Email" />
-            <Label layoutX="142.0" layoutY="167.0" text="Firstname" />
-            <Label layoutX="304.0" layoutY="167.0" text="Lastname" />
-            <Label layoutX="154.0" layoutY="226.0" text="Gender" />
-            <Label layoutX="277.0" layoutY="226.0" text="Birthdate" />
-            <Label layoutX="224.0" layoutY="288.0" text="Password" />
-            <Button fx:id="registerButton" id="registerButton" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" text="Register" />
-            <Hyperlink fx:id="RegisterLink" onAction="#setOnActionLink"id="LogInHyperlinkRegister" layoutX="95.0" layoutY="333.0" text="Log in here" />
+            <TextField id="firstnameregister" fx:id="firstname_field" layoutX="144.0" layoutY="184.0" />
+            <TextField id="registeremail" fx:id="email_field" layoutX="220.0" layoutY="119.0" />
+            <TextField id="lastnameRegister" fx:id="lastname_field" layoutX="304.0" layoutY="184.0" />
+            <PasswordField id="passwordRegister" fx:id="password_field" layoutX="224.0" layoutY="305.0" />
+            <RadioButton id="FemaleRegister" fx:id="female_radio" layoutX="157.0" layoutY="248.0" mnemonicParsing="false" text="Female" />
+            <RadioButton id="maleRegister" fx:id="male_radio" layoutX="158.0" layoutY="270.0" mnemonicParsing="false" text="Male" />
+            <DatePicker id="birthdateRegister" fx:id="birthdate_field" layoutX="277.0" layoutY="243.0" />
+            <Label fx:id="label_email" layoutX="219.0" layoutY="102.0" text="Email" />
+            <Label fx:id="firstname_text" layoutX="142.0" layoutY="167.0" text="Firstname" />
+            <Label fx:id="lastname_label" layoutX="304.0" layoutY="167.0" text="Lastname" />
+            <Label fx:id="gender_label" layoutX="154.0" layoutY="226.0" text="Gender" />
+            <Label fx:id="birthdate_label" layoutX="277.0" layoutY="226.0" text="Birthdate" />
+            <Label fx:id="password_label" layoutX="224.0" layoutY="288.0" text="Password" />
+            <Button id="registerButton" fx:id="register_button" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" onAction="#RegisterAction" text="Register" />
+            <Hyperlink id="LogInHyperlinkRegister" fx:id="loginhyper" layoutX="95.0" layoutY="333.0" onAction="#LogInAction" text="Log in here" />
          </children>
       </AnchorPane>
    </center>

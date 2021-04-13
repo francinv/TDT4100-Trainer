@@ -23,7 +23,8 @@
             <PasswordField id="passwordField" fx:id="password_field" layoutX="220.0" layoutY="237.0" />
             <Label id="passwordLabel" fx:id="password_label" layoutX="220.0" layoutY="220.0" text="Password" />
             <Button id="LogInButton" fx:id="LogIn_button" layoutX="334.0" layoutY="284.0" mnemonicParsing="false" onAction="#LogInAction" text="Log in" />
-            <Hyperlink fx:id="register_hyperlink" layoutX="239.0" layoutY="328.0" onAction="#GoToRegister" text="Click here to register" />
+            <Hyperlink fx:id="register_hyperlink" layoutX="239.0" layoutY="348.0" onAction="#GoToRegister" text="Click here to register" />
+            <Label fx:id="display" layoutX="251.0" layoutY="322.0" prefHeight="17.0" prefWidth="98.0" />
          </children>
       </AnchorPane>
    </center>

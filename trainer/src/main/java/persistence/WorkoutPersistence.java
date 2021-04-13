@@ -54,7 +54,7 @@ public class WorkoutPersistence implements filePersistence{
 		System.out.println("Trying");
 		  try
 	        {
-	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/workout.txt");
+	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/workout.txt");
 	            outFile.println("WorkoutID: " + workout.getUniqueID() + "\n" + workout );
 	            outFile.close();
 	            System.out.println("Done");
@@ -69,7 +69,7 @@ public class WorkoutPersistence implements filePersistence{
 	}
 	
 	public static void main(String[] args) {
-		String file = "src/main/java/workoutplanner/persistence/workout.txt";
+		String file = "src/main/java/persistence/workout.txt";
 		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
 		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
 				"kevin@mail.com","1234","15/04/1998"

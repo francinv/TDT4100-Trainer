@@ -10,62 +10,65 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections ?>
+<?import java.lang.String?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateWorkoutController">
    <center>
       <AnchorPane prefHeight="543.0" prefWidth="725.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="329.0" layoutY="30.0" text="Create Workout">
+            <Label fx:id="title_create" layoutX="329.0" layoutY="30.0" text="Create Workout">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="121.0" layoutY="106.0" text="Name of workout" />
-            <TextField fx:id="workoutCreateName" id="workoutCreateName" fx:id="workoutCreateName" layoutX="121.0" layoutY="123.0" prefHeight="27.0" prefWidth="213.0" />
-            <TextField fx:id="NumberOfExercisesCreate" id="NumberOfExercisesCreate" fx:id="NumberOfExercisesCreate" layoutX="121.0" layoutY="182.0" prefHeight="27.0" prefWidth="212.0" promptText="Number of exercises" />
-            <Label layoutX="121.0" layoutY="162.0" text="Exercises" />
-            <Label layoutX="121.0" layoutY="351.0" text="Muscles" />
-            <DatePicker fx:id="whenWorkoutCreate" id="whenWorkoutCreate" fx:id="whenWorkoutCreate" layoutX="462.0" layoutY="123.0" />
-            <Label layoutX="462.0" layoutY="106.0" text="When" />
-            <ComboBox fx:id="TypeWorkoutCreate" layoutX="464.0" layoutY="182.0" prefHeight="27.0" prefWidth="186.0">
+            <Label fx:id="name_label" layoutX="121.0" layoutY="106.0" text="Name of workout" />
+            <TextField id="workoutCreateName" fx:id="workoutCreateName" layoutX="121.0" layoutY="123.0" prefHeight="27.0" prefWidth="213.0" />
+            <TextField id="NumberOfExercisesCreate" fx:id="NumberOfExercisesCreate" layoutX="121.0" layoutY="182.0" prefHeight="27.0" prefWidth="212.0" promptText="Number of exercises" />
+            <Label fx:id="exercises_label" layoutX="121.0" layoutY="162.0" text="Exercises" />
+            <Label fx:id="muscles_label" layoutX="121.0" layoutY="351.0" text="Muscles" />
+            <DatePicker id="whenWorkoutCreate" fx:id="whenWorkoutCreate" layoutX="462.0" layoutY="123.0" />
+            <Label fx:id="when_label" layoutX="462.0" layoutY="106.0" text="When" />
+            <ComboBox fx:id="type_field" layoutX="464.0" layoutY="182.0" prefHeight="27.0" prefWidth="186.0">
+            	<items>
+					<FXCollections fx:factory="observableArrayList">
+						<String fx:value="Strength"/>
+						<String fx:value="Hypothraphy"/>
+						<String fx:value="Endurance"/>
+					</FXCollections>
+				</items>
+            </ComboBox>
+            <Label fx:id="type_label" layoutX="465.0" layoutY="162.0" text="Type" />
+            <Label fx:id="category_label" layoutX="462.0" layoutY="221.0" text="Category" />
+            <ComboBox id="DurationWorkoutCreate" fx:id="duration_field" layoutX="466.0" layoutY="379.0" prefHeight="27.0" prefWidth="180.0">
             	<items>
             		<FXCollections fx:factory="observableArrayList">
-            			<String fx:value="Strength"/>
-               			<String fx:value="Hypothraphy"/>
-               			<String fx:value="Endurance"/>
+            			<String fx:value="0-1 hrs"/>
+            			<String fx:value ="1-2 hrs"/>
+            			<String fx:value ="2-3 hrs"/>
+            			<String fx:value="3-4 hrs" />
             		</FXCollections>
             	</items>
             </ComboBox>
-            <Label layoutX="465.0" layoutY="162.0" text="Type" />
-            <Label layoutX="462.0" layoutY="221.0" text="Category" />
-            <ComboBox id="DurationWorkoutCreate" layoutX="466.0" layoutY="379.0" prefHeight="27.0" prefWidth="180.0">
-            	<items>
-            		<FXCollections fx:factory="observableArrayList">
-            			<String fx:value="0-1 hr"/>
-            			<String fx:value="1-2 hrs"/>
-            			<String fx:value="2-3 hrs"/>
-            		</FXCollections>
-            	</items>
-            </ComboBox>
-            <Label layoutX="464.0" layoutY="360.0" text="Duration" />
-            <Button fx:id="ButtonCreateWorkout" id="ButtonCreateWorkout" layoutX="343.0" layoutY="506.0" mnemonicParsing="false" text="Create Workout" onAction="CreateWorkout"/>
-            <TextArea fx:id="DescriptionWorkout" id="DescriptionWorkout" layoutX="121.0" layoutY="213.0" prefHeight="131.0" prefWidth="212.0" promptText="Description of workout" />
-            <CheckBox fx:id="ChestWorkoutCreate" id="ChestWorkoutCreate" layoutX="121.0" layoutY="375.0" mnemonicParsing="false" text="Chest" />
-            <CheckBox fx:id="TricepsWorkoutCreate" id="TricepsWorkoutCreate" layoutX="121.0" layoutY="402.0" mnemonicParsing="false" text="Triceps" />
-            <CheckBox fx:id="BackWorkoutCreate" id="BackWorkoutCreate" layoutX="121.0" layoutY="430.0" mnemonicParsing="false" text="Back" />
-            <CheckBox fx:id="BicepsWorkoutCreate" id="BicepsWorkoutCreate" layoutX="121.0" layoutY="456.0" mnemonicParsing="false" text="Biceps" />
-            <CheckBox fx:id="LegsWorkoutCreate" id="LegsWorkoutCreate" layoutX="228.0" layoutY="375.0" mnemonicParsing="false" text="Legs" />
-            <CheckBox fx:id="GlutesWorkoutCreate" id="GlutesWorkoutCreate" layoutX="228.0" layoutY="402.0" mnemonicParsing="false" text="Glutes" />
-            <CheckBox fx:id="CoreWorkoutCreate" id="CoreWorkoutCreate" layoutX="228.0" layoutY="430.0" mnemonicParsing="false" text="Core" />
-            <CheckBox fx:id="OtherWorkoutCreate" id="OtherWorkoutCreate" layoutX="228.0" layoutY="456.0" mnemonicParsing="false" text="Other" />
-            <CheckBox fx:id="ShoulderWorkoutCreate" id="ShoulderWorkoutCreate" layoutX="121.0" layoutY="482.0" mnemonicParsing="false" text="Shoulder" />
-            <CheckBox fx:id="PushWorkoutCreate" layoutX="464.0" layoutY="246.0" mnemonicParsing="false" text="Push" />
-            <CheckBox fx:id="PullWorkoutCreate" layoutX="464.0" layoutY="270.0" mnemonicParsing="false" text="Pull" />
-            <CheckBox fx:id="LegsWorkoutCreate" layoutX="464.0" layoutY="295.0" mnemonicParsing="false" text="Legs" />
-            <CheckBox fx:id="UpperWorkoutCreate" layoutX="464.0" layoutY="320.0" mnemonicParsing="false" text="Upper Body" />
-            <CheckBox fx:id="LowerWorkoutCreate" layoutX="569.0" layoutY="246.0" mnemonicParsing="false" text="Lower body" />
-            <CheckBox fx:id="FullWorkoutCreate" layoutX="569.0" layoutY="270.0" mnemonicParsing="false" text="Full body" />
-            <CheckBox fx:id="CardioWorkoutCreate" layoutX="569.0" layoutY="295.0" mnemonicParsing="false" text="Cardio" />
+            <Label fx:id="duration_label" layoutX="464.0" layoutY="360.0" text="Duration" />
+            <Button id="ButtonCreateWorkout" fx:id="create_button" layoutX="343.0" layoutY="506.0" mnemonicParsing="false" onAction="#CreateWorkout" text="Create Workout" />
+            <TextArea id="DescriptionWorkout" fx:id="description_field" layoutX="121.0" layoutY="213.0" prefHeight="131.0" prefWidth="212.0" promptText="Description of workout" />
+            <CheckBox id="ChestWorkoutCreate" fx:id="chest_radio" layoutX="121.0" layoutY="375.0" mnemonicParsing="false" text="Chest" />
+            <CheckBox id="TricepsWorkoutCreate" fx:id="triceps_radio" layoutX="121.0" layoutY="402.0" mnemonicParsing="false" text="Triceps" />
+            <CheckBox id="BackWorkoutCreate" fx:id="back_radio" layoutX="121.0" layoutY="430.0" mnemonicParsing="false" text="Back" />
+            <CheckBox id="BicepsWorkoutCreate" fx:id="biceps_radio" layoutX="121.0" layoutY="456.0" mnemonicParsing="false" text="Biceps" />
+            <CheckBox id="LegsWorkoutCreate" fx:id="legs_box" layoutX="228.0" layoutY="375.0" mnemonicParsing="false" text="Legs" />
+            <CheckBox id="GlutesWorkoutCreate" fx:id="glutes_box" layoutX="228.0" layoutY="402.0" mnemonicParsing="false" text="Glutes" />
+            <CheckBox id="CoreWorkoutCreate" fx:id="core_box" layoutX="228.0" layoutY="430.0" mnemonicParsing="false" text="Core" />
+            <CheckBox id="OtherWorkoutCreate" fx:id="other_box" layoutX="228.0" layoutY="456.0" mnemonicParsing="false" text="Other" />
+            <CheckBox id="ShoulderWorkoutCreate" fx:id="shoulder_box" layoutX="121.0" layoutY="482.0" mnemonicParsing="false" text="Shoulder" />
+            <CheckBox fx:id="push_radio" layoutX="464.0" layoutY="246.0" mnemonicParsing="false" text="Push" />
+            <CheckBox fx:id="pull_radio" layoutX="464.0" layoutY="270.0" mnemonicParsing="false" text="Pull" />
+            <CheckBox fx:id="legs_radio" layoutX="464.0" layoutY="295.0" mnemonicParsing="false" text="Legs" />
+            <CheckBox fx:id="upper_radio" layoutX="464.0" layoutY="320.0" mnemonicParsing="false" text="Upper Body" />
+            <CheckBox fx:id="lower_radio" layoutX="569.0" layoutY="246.0" mnemonicParsing="false" text="Lower body" />
+            <CheckBox fx:id="full_radio" layoutX="569.0" layoutY="270.0" mnemonicParsing="false" text="Full body" />
+            <CheckBox fx:id="cardio_radio" layoutX="569.0" layoutY="295.0" mnemonicParsing="false" text="Cardio" />
          </children>
       </AnchorPane>
    </center>

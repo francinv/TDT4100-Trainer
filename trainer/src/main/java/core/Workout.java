@@ -1,5 +1,6 @@
 package core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -14,14 +15,15 @@ public class Workout {
 	private List<String> muscles = new ArrayList<String>();
 	private List<String> muscleGroup = Arrays.asList("Chest","Triceps","Back","Biceps","Shoulder","legs",
 			"Glutes", "Core", "Other");
-	private String when;
+	private String when1;
+	private LocalDate when;
 	private Date today = new Date();
 	private String type;
 	private List<String> types = Arrays.asList("Strength", "Hypothraphy","Endurance");
-	private String category;
+	private List<String> category = new ArrayList<String>();
 	private List<String> categories = Arrays.asList("Push", "Pull", "Legs","Upper body","Lower body"
 			,"Full body", "Cardio"); 
-	private int duration;
+	private String duration;
 	private String description;
 	private Userprofile createdBy;
 	private Userprofile subs;
@@ -38,7 +40,7 @@ public class Workout {
 			throw new IllegalArgumentException("The date is invalid");
 		}
 		*/
-		this.when = when;
+		this.when1 = when;
 		this.type = type;
 		this.category = category;
 		this.duration = duration;
@@ -55,6 +57,19 @@ public class Workout {
 		
 	}
 	
+
+	public Workout(String name, int amountOfExercises, List<String> muscles, LocalDate when, String type,
+			List<String> category,String duration, String description) {
+		this.name = name;
+		this.amountOfExercises = amountOfExercises;
+		this.muscles = muscles;
+		this.when = when;
+		this.type = type;
+		this.category = category;
+		this.duration = duration;
+		this.description = description;
+	}
+
 	public Userprofile getCreater() {
 		return createdBy;
 	}
@@ -103,7 +118,7 @@ public class Workout {
 	}
 	
 	public String getWhen() {
-		return when;
+		return when1;
 	}
 	
 	public void setWhen(String when) {
@@ -111,7 +126,7 @@ public class Workout {
 			throw new IllegalArgumentException("The date is invalid");
 		}
 		*/
-		this.when = when;
+		this.when1 = when;
 	}
 	
 	
@@ -180,15 +195,15 @@ public class Workout {
 		};
 		return 
 				"Name of workout: "+ name +  "\n" +
-				"By: " + createdBy.getName() +"\n" +
+				//"By: " + createdBy.getName() +"\n" +
 				"When: "+ when + "\n" +
-				"Duration: "+ duration + " hours\n" +
+				"Duration: "+ duration + "\n" +
 				"Type of workout: "+ type + "\n" +
 				"Category: "+ category + "\n" +
 				"Muscles trained: "+ muscles + "\n" +
 				"Number of excercises: "+ amountOfExercises+ "\n" +
-				"Description: "+ description + "\n" + 
-				"Users using your workout: "+ userNames + "\n\n"; 
+				"Description: "+ description + "\n\n" ;
+				//"Users using your workout: "+ userNames + "\n\n"; 
 				
 				
 	}
