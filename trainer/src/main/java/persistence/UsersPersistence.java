@@ -1,7 +1,10 @@
 package src.main.java.persistence;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +71,73 @@ private String file;
 	   
 		
 	}
+	
+	@Override
+	public void updateFile(String File, String email, List<String> trening  ) {
+		System.out.println("Trying to update file");
+		String tempFile = "src/main/java/workoutplanner/persistence/userProfilesTemp.txt";
+		File oldFile = new File(file);
+		File newFile = new File(tempFile);
+		String name = ""; String birthday = ""; String gender = ""; String mail = ""; String workouts = ""; 
+		try {
+			FileWriter fw = new FileWriter(tempFile,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			scan = new Scanner(new File(file));
+			//scan.useDelimiter(",");
+			
+			while(scan.hasNext()) {
+				name = scan.nextLine();
+				System.out.println(name);
+				if (name.equals("")) {
+					pw.println("]");
+					break;
+				}
+				birthday = scan.nextLine();
+				System.out.println(birthday);
+				gender = scan.nextLine();
+				System.out.println(gender);
+				mail = scan.nextLine();
+				System.out.println(mail);
+				String mail2 = mail.substring(7);
+				System.out.println(mail2);
+				workouts = scan.nextLine();
+				System.out.println(workouts);
+				System.out.println("sqrtsqrt");
+				System.out.println(scan.hasNext());
+				if(mail2.equals(email)) {
+					pw.println(name);
+					pw.println(birthday);
+					pw.println(gender);
+					pw.println(mail);
+					pw.println("Workouts: "+trening);
+					System.out.println("endret trening");
+					
+				}
+				else{
+					pw.println(name);
+					pw.println(birthday);
+					pw.println(gender);
+					pw.println(mail);
+					pw.println(workouts);
+					System.out.println("skrev trening");
+				}
+			}
+			System.out.println("Updating finished");
+			scan.close();
+			pw.flush();
+			pw.close();
+			File dump = new File(file);
+			newFile.renameTo(dump);
+		}
+		catch (Exception e)
+        {
+            System.err.println("Error: file could not be opened for updating.");
+            System.exit(1);
+        }
+	}
+
+	
 	
 	public static void main(String[] args) {
 		String file = "src/main/java/workoutplanner/persistence/allUsers.txt";
