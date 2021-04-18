@@ -1,0 +1,11 @@
+[Workoutname: Chest
+By: Suthan Raja
+When: 2021-04-08
+Duration: null
+Workouttype: Strength
+Category: [Push]
+Muscles trained: [Chest]
+Number of excercises: 4
+Description: Hard, intenstive, sweat
+
+]

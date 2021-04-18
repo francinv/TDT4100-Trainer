@@ -19,6 +19,10 @@ public class Userprofile {
 	private String password;
 	private Collection<Workout>myWorkouts = new ArrayList<Workout>();
 	
+	public Userprofile() {
+		
+	}
+	
 	public Userprofile(String firstName, String lastName, String email, String password,
 		LocalDate birthday, char gender) {	
 		
@@ -89,6 +93,10 @@ public class Userprofile {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 	
 	private String getPassword() {

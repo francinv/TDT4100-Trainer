@@ -21,11 +21,11 @@
       <Button fx:id="ProfileButton" layoutX="516.0" layoutY="243.0" mnemonicParsing="false" onAction="#GoToProfile" text="Profile" />
       <ListView fx:id="listview_workouts" layoutX="53.0" layoutY="87.0" onMouseClicked="#WorkoutDetail" prefHeight="202.0" prefWidth="347.0">
       </ListView>
-      <ComboBox fx:id="filter_type" layoutX="423.0" layoutY="122.0" onAction="#filter" prefWidth="150.0" promptText="Show only">
+      <ComboBox fx:id="filter_type" layoutX="423.0" layoutY="122.0" onAction="#filter" prefWidth="150.0" promptText="Show only" >
       	<items>
       		<FXCollections fx:factory="observableArrayList">
       			<String fx:value="Strength"/>
-      			<String fx:value="Hypothrapy"/>
+      			<String fx:value="Hypothraphy"/>
       			<String fx:value="Endurance"/>
       		</FXCollections>
       	</items>

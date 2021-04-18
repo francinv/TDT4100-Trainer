@@ -36,10 +36,6 @@ public class Workout {
 		this.name = name;
 		this.amountOfExercises = amountOfExercises;
 		this.muscles = muscles;
-		/*if (when.before(today)) {
-			throw new IllegalArgumentException("The date is invalid");
-		}
-		*/
 		this.when1 = when;
 		this.type = type;
 		this.category = category;
@@ -57,9 +53,23 @@ public class Workout {
 		
 	}
 	
+	public Workout( String name, int amountOfExercises,
+			List<String> muscles, LocalDate when, String type, String category,
+			int duration, String description) {
+		this.name = name;
+		this.amountOfExercises = amountOfExercises;
+		this.muscles = muscles;
+		this.when1 = when;
+		this.type = type;
+		this.category = category;
+		this.duration = duration;
+		this.createdBy = createdBy;
+		this.description = description;
+	}
 
-	public Workout(String name, int amountOfExercises, List<String> muscles, LocalDate when, String type,
-			List<String> category,String duration, String description) {
+	public Workout(Userprofile createdBy, String name, int amountOfExercises, List<String> muscles, LocalDate when, String type,
+			List<String> category, String duration, String description) {
+		this.createdBy = createdBy;
 		this.name = name;
 		this.amountOfExercises = amountOfExercises;
 		this.muscles = muscles;
@@ -194,11 +204,11 @@ public class Workout {
 			userNames.add(user.getName());
 		};
 		return 
-				"Name of workout: "+ name +  "\n" +
-				//"By: " + createdBy.getName() +"\n" +
+				"Workoutname: "+ name +  "\n" +
+				"By: " + createdBy.getName() +"\n" +
 				"When: "+ when + "\n" +
 				"Duration: "+ duration + "\n" +
-				"Type of workout: "+ type + "\n" +
+				"Workouttype: "+ type + "\n" +
 				"Category: "+ category + "\n" +
 				"Muscles trained: "+ muscles + "\n" +
 				"Number of excercises: "+ amountOfExercises+ "\n" +

@@ -3,6 +3,7 @@ package persistence;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +15,8 @@ public class UserProfilePersistence implements filePersistence {
 	
 private Userprofile user;
 private String file;
+
+public ArrayList<String> loggedin = new ArrayList<String>();
 	
 	public UserProfilePersistence(String file) {
 		this.file = file;
@@ -33,8 +36,7 @@ private String file;
             in = new Scanner(new FileReader(file));
              
             while(in.hasNext()){
-                String line = in.nextLine();
-                System.out.println(line);
+            	loggedin.add(in.next());
             }
              
             in.close();

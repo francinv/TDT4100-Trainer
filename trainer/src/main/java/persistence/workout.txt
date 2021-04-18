@@ -1,11 +1,12 @@
-WorkoutID: 975eedb1-ed4a-454c-94e9-88af0706ab23
-Name of workout: Hello
-When: 2021-04-15
-Duration: 2-3 hrs hours
-Type of workout: Strength
-Category: [Push, Legs]
-Muscles trained: [Chest, Triceps, Back, Legs]
-Number of excercises: 19
-Description: fjdfj dfjdsjfjf
+WorkoutID: d5aee11d-8424-4103-91fd-e668b241144b
+Name of workout: dsfsdf
+By: Kevin Cornolis
+When: 2021-04-01
+Duration: 0-1 hrs
+Type of workout: Hypothraphy
+Category: [Upper]
+Muscles trained: [Triceps]
+Number of excercises: 3
+Description: dsfsdf
 
 

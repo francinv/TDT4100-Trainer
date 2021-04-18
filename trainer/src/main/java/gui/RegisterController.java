@@ -76,6 +76,8 @@ public class RegisterController {
 
     @FXML
     private Hyperlink loginhyper;
+    
+    @FXML private Label display;
 
 
     @FXML
@@ -116,6 +118,7 @@ public class RegisterController {
     	} catch (Exception e){
     		e.printStackTrace();
     	}
+    	display.setText("New user registered!");
     	
     }
 

@@ -2,13 +2,18 @@ package gui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import Trainer.TrainerApp;
 import core.Workout;
 import core.Userprofile;
-import gui.LoginController;
+import persistence.UserProfilePersistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -16,9 +21,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import persistence.WorkoutPersistence;
+import persistence.allWorkoutsPersistence;
 
 public class CreateWorkoutController {
+	
+	static Stage stage;
 
     @FXML private Label title_create;
     @FXML private Label name_label;
@@ -54,10 +63,22 @@ public class CreateWorkoutController {
     
     private List<String> muscles = new ArrayList<String>();
     private List<String> category = new ArrayList<String>();
-
+    private ArrayList<String> user = new ArrayList<String>();
+    private Collection<Workout> allWorkouts = new ArrayList<Workout>();
+    
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String birthday;
+    private char gender;
+    
+    
     @FXML
     void CreateWorkout(ActionEvent event) {
-    	//Userprofile createdBy = LoginController.usernametext;
+    	getLoggedInUserInfo();
+    	Userprofile thisuser = new Userprofile(firstName, lastName, email, password, birthday, gender);
+    	System.out.println(thisuser);
     	String name = workoutCreateName.getText();
     	int number_of_exercises = Integer.parseInt(NumberOfExercisesCreate.getText());
     	String description = description_field.getText();
@@ -67,14 +88,36 @@ public class CreateWorkoutController {
     	getCategory();
     	String duration = duration_field.getValue();
     	
-    	Workout workout = new Workout( name, number_of_exercises, muscles, when, type, category,duration, description);
-    	WorkoutPersistence workouts = new WorkoutPersistence (workout, "src/main/java/persistence/workout.txt" );
+    	Workout workout = new Workout(thisuser, name, number_of_exercises, muscles, when, type, category,duration, description);
+    	System.out.println(workout);
     	
+    	UserProfilePersistence up = new UserProfilePersistence(thisuser, "src/main/java/persistence/userProfiles.txt");
+    	allWorkoutsPersistence workouts = new allWorkoutsPersistence("src/main/java/persistence/allworkouts.txt", allWorkouts);
+    	allWorkouts.add(workout);
+    	thisuser.addMyWorkouts(workout);
     	try {
+    		up.writeFile();
     		workouts.writeFile();
+    		
     	} catch(Exception e) {
     		e.printStackTrace();
     	}
+    	Success();
+    	Load();
+    	
+    }
+    
+    private void getLoggedInUserInfo() {
+    	UserProfilePersistence up = new UserProfilePersistence("src/main/java/persistence/userProfiles.txt");
+    	up.readFile("src/main/java/persistence/userProfiles.txt");
+    	user = up.loggedin;
+    	firstName = user.get(1);
+    	lastName = user.get(2);
+    	birthday = user.get(4);
+    	gender = user.get(6).charAt(0);
+    	email = user.get(8);
+    	password = user.get(10);
+    	
     }
     
     private void getMuscles() {
@@ -167,5 +210,23 @@ public class CreateWorkoutController {
     	System.out.println(category);
     }
 
+	private void Success() {
+		title_create.setText("Workout created!");
+	}
+	
+	void Load() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("Workouts.fxml"));
+		try {
+			Parent root = (Parent) fxmlLoader.load();
+			Stage stg = new Stage();
+			stg.setScene(new Scene(root));
+			stg.show();
+			Stage stage = (Stage) create_button.getScene().getWindow();
+		    stage.close();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 

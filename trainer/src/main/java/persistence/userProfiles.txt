@@ -1,7 +1,8 @@
-Navn: Kevin Cornolis
-birthday: 1998-04-15
+Navn: Pravin Thevakan
+birthday: 2010-04-14
 gender: M
-email: kevinco@ntnu.no
-Workouts: [Idag skal jeg dø, RIP]
+email: pravin@mail.com
+password: qwerty
+Workouts: []
 
 

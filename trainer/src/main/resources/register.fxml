@@ -15,7 +15,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="714.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="title_label" layoutX="234.0" layoutY="51.0" text="Register Trainer">
+            <Label fx:id="title_label" layoutX="234.0" layoutY="36.0" text="Register Trainer">
                <font>
                   <Font size="20.0" />
                </font>
@@ -35,6 +35,7 @@
             <Label fx:id="password_label" layoutX="224.0" layoutY="288.0" text="Password" />
             <Button id="registerButton" fx:id="register_button" layoutX="410.0" layoutY="332.0" mnemonicParsing="false" onAction="#RegisterAction" text="Register" />
             <Hyperlink id="LogInHyperlinkRegister" fx:id="loginhyper" layoutX="95.0" layoutY="333.0" onAction="#LogInAction" text="Log in here" />
+            <Label fx:id="display" layoutX="155.0" layoutY="71.0" prefHeight="17.0" prefWidth="291.0" />
          </children>
       </AnchorPane>
    </center>

@@ -1,5 +1,11 @@
 package gui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import persistence.allWorkoutsPersistence;
 
 public class WorkoutListController {
 
@@ -21,15 +28,47 @@ public class WorkoutListController {
 	@FXML private ListView<String> listview_workouts;
 	@FXML private ComboBox<String> filter_type;
 	
+	private ObservableList<String> workoutslist = FXCollections.observableArrayList();
+	private ObservableList<String> workoutnames = FXCollections.observableArrayList();
+	private allWorkoutsPersistence wp = new allWorkoutsPersistence("src/main/java/persistence/allworkouts.txt");
+	
 	@FXML
 	public void initialize() {
 		populateList();
+		getList();
 	}
 
 	private void populateList() {
-		// TODO Auto-generated method stub
+		listview_workouts.setItems(workoutnames);
 		
 	}
+	
+	private void getList() {
+		wp.readFile("src/main/java/persistence/allworkouts.txt");
+		workoutslist = wp.allWorkouts;
+		String text = "Workoutname:";
+		
+		
+		List<Integer> listIndex = new ArrayList();
+		for (int i = 0; i < workoutslist.size(); i++) {
+			String element = workoutslist.get(i);
+			
+			if (text.equals(element)) {
+				listIndex.add(i+1);
+			}
+		}
+		listIndex.add(1);
+		Collections.sort(listIndex);
+		
+		for (int x = 0; x < listIndex.size(); x++) {
+			int element = listIndex.get(x);
+			workoutnames.add(workoutslist.get(element));
+		}
+		System.out.println(workoutnames);
+		
+	}
+	
+	
 	
 	@FXML
 	private void LogoutAction(ActionEvent event) {
@@ -41,7 +80,7 @@ public class WorkoutListController {
 			stg.show();
 			Stage stage = (Stage) log_out.getScene().getWindow();
 		    stage.close();
-
+ 
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -88,7 +127,26 @@ public class WorkoutListController {
 	
 	@FXML
 	private void filter(ActionEvent event) {
-		System.out.println("Sort");
+		String filterToken = filter_type.getValue();
+		
+		List<Integer> listIndex = new ArrayList();
+		for (int i = 0; i < workoutslist.size(); i++) {
+			String element = workoutslist.get(i);
+			
+			if (filterToken.equals(element)) {
+				listIndex.add(i);
+			}
+		}
+		Collections.sort(listIndex);
+		System.out.println(listIndex);
+		
+		workoutnames.clear();
+		for (int x = 0; x < listIndex.size(); x++) {
+			int element = listIndex.get(x);
+			workoutnames.add(workoutslist.get(element-10));
+		}
+		populateList();
+		System.out.println(workoutnames);
 	}
 	
 }
