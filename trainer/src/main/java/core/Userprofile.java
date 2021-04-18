@@ -1,13 +1,15 @@
-package core;
+package src.main.java.core;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import main.java.workoutplanner.core.Workout;
 
-public class Userprofile {
+public class Userprofile{
 
 	private String firstName;
 	private String lastName;
@@ -181,5 +183,4 @@ public class Userprofile {
 		kevinco.addMyWorkouts(workout);
 		System.out.println(kevinco);
 	}
-
-}
+ }

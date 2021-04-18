@@ -72,5 +72,9 @@ public class Subs{
 		System.out.println("sfkdjldkfsjlf");
 	}
 	
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> kevin2
