@@ -1,4 +1,4 @@
-package src.main.java.core;
+package core;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +45,7 @@ public class Userprofile{
 	
 	public Userprofile(String firstName, String lastName, String email, String password, String birthday,
 			char gender) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		this.firstName = firstName;
 		this.lastName = lastName;

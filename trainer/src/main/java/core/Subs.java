@@ -68,13 +68,4 @@ public class Subs{
 		return workout.getUniqueID();
 	}
 
-	public static void main(String[] args) {
-		System.out.println("sfkdjldkfsjlf");
-	}
 	
-<<<<<<< HEAD
-}
-
-=======
-}
->>>>>>> kevin2

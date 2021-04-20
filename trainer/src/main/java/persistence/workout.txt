@@ -1,12 +1,12 @@
-WorkoutID: d5aee11d-8424-4103-91fd-e668b241144b
-Name of workout: dsfsdf
-By: Kevin Cornolis
-When: 2021-04-01
-Duration: 0-1 hrs
-Type of workout: Hypothraphy
-Category: [Upper]
-Muscles trained: [Triceps]
-Number of excercises: 3
-Description: dsfsdf
+Workoutname: hello
+By: Pravin Thevakan
+When: 2021-04-20
+Duration: 1-2
+Workouttype: Hypothraphy
+Category: [[Push]]
+Muscles trained: [[Chest,, Triceps]]
+Number of excercises: 32
+Description: [hello, hello]
+Users using your workout: []
 
 

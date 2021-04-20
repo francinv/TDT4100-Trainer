@@ -1,8 +1,8 @@
-Navn: Pravin Thevakan
-birthday: 2010-04-14
+Navn: Kevin Cornolis
+birthday: 2021-04-13
 gender: M
-email: pravin@mail.com
-password: qwerty
-Workouts: []
+email: kevin@mail.com
+password: test
+Workouts: [test]
 
 

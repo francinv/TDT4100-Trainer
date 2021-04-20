@@ -22,6 +22,7 @@ import java.util.Collection;
 
 import Trainer.TrainerApp;
 import core.Userprofile;
+import core.Workout;
 
 public class RegisterController {
 	
@@ -111,7 +112,14 @@ public class RegisterController {
     		gender = 'M';
     	}
     	
-    	Userprofile user = new Userprofile(firstname, lastname, email, password, birthdate, gender);
+    	Collection<Workout> workouts = new ArrayList();
+    	System.out.println(firstname);
+    	System.out.println(lastname);
+    	System.out.println(email);
+    	System.out.println(password);
+    	System.out.println(birthdate);
+    	System.out.println(gender);
+    	Userprofile user = new Userprofile(firstname, lastname, email, password, birthdate, gender, workouts);
     	allUsers.add(user);
     	try {
     		users.writeFile();

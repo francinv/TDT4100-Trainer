@@ -1,11 +1,12 @@
-[Workoutname: Chest
-By: Suthan Raja
-When: 2021-04-08
-Duration: null
-Workouttype: Strength
+[Workoutname: hello
+By: Pravin Thevakan
+When: 2021-04-20
+Duration: 1-2
+Workouttype: Hypothraphy
 Category: [Push]
-Muscles trained: [Chest]
-Number of excercises: 4
-Description: Hard, intenstive, sweat
+Muscles trained: [Chest, Triceps]
+Number of excercises: 32
+Description: hello hello
+Users using your workout: []
 
 ]

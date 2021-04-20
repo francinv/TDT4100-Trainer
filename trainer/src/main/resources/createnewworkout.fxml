@@ -43,14 +43,14 @@
             <ComboBox id="DurationWorkoutCreate" fx:id="duration_field" layoutX="466.0" layoutY="379.0" prefHeight="27.0" prefWidth="180.0">
             	<items>
             		<FXCollections fx:factory="observableArrayList">
-            			<String fx:value="0-1 hrs"/>
-            			<String fx:value ="1-2 hrs"/>
-            			<String fx:value ="2-3 hrs"/>
-            			<String fx:value="3-4 hrs" />
+            			<String fx:value="0-1"/>
+            			<String fx:value ="1-2"/>
+            			<String fx:value ="2-3"/>
+            			<String fx:value="3-4" />
             		</FXCollections>
             	</items>
             </ComboBox>
-            <Label fx:id="duration_label" layoutX="464.0" layoutY="360.0" text="Duration" />
+            <Label fx:id="duration_label" layoutX="464.0" layoutY="360.0" text="Duration (hrs)" />
             <Button id="ButtonCreateWorkout" fx:id="create_button" layoutX="343.0" layoutY="506.0" mnemonicParsing="false" onAction="#CreateWorkout" text="Create Workout" />
             <TextArea id="DescriptionWorkout" fx:id="description_field" layoutX="121.0" layoutY="213.0" prefHeight="131.0" prefWidth="212.0" promptText="Description of workout" />
             <CheckBox id="ChestWorkoutCreate" fx:id="chest_radio" layoutX="121.0" layoutY="375.0" mnemonicParsing="false" text="Chest" />

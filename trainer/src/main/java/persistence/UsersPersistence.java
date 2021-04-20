@@ -1,4 +1,4 @@
-package src.main.java.persistence;
+package persistence;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,12 +12,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import main.java.workoutplanner.core.Userprofile;
-import main.java.workoutplanner.core.Workout;
+import core.Userprofile;
+import core.Workout;
 
 public class UsersPersistence implements filePersistence {
 
 private Collection<Userprofile> allUsers = new ArrayList<Userprofile>();
+public ArrayList<String> list = new ArrayList<String>();
 private String file;
 	
 	public UsersPersistence(String file) {
@@ -75,7 +76,7 @@ private String file;
 	}
 	
 	@Override
-	public void updateFile(String File, String email, List<String> trening  ) {
+	public void updateFile(String file, String email, List<String> trening  ) {
 		System.out.println("Trying to update file");
 		String tempFile = "src/main/java/workoutplanner/persistence/userProfilesTemp.txt";
 		File oldFile = new File(file);
@@ -85,7 +86,7 @@ private String file;
 			FileWriter fw = new FileWriter(tempFile,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			scan = new Scanner(new File(file));
+			Scanner scan = new Scanner(new File(file));
 			//scan.useDelimiter(",");
 
 			while(scan.hasNext()) {
@@ -138,11 +139,58 @@ private String file;
             System.exit(1);
         }
 	}
+	
+	public void addUserToFile(String file, Userprofile user) {
+		System.out.println("Trying to update file");
+		String tempFile = "src/main/java/persistence/addUserTemp.txt";
+		File oldFile = new File(file);
+		File newFile = new File(tempFile);
+		String name = ""; String birthday = ""; String gender = ""; String mail = ""; String workouts = ""; 
+		try {
+			FileWriter fw = new FileWriter(tempFile,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			Scanner scan = new Scanner(new File(file));
+			
+			while(scan.hasNext()) {
+				name = scan.nextLine();
+				System.out.println(name);
+				if (name.equals("]")) {
+					pw.println(", "+user+"]");
+					break;
+				}
+				birthday = scan.nextLine();
+				System.out.println(birthday);
+				gender = scan.nextLine();
+				System.out.println(gender);
+				mail = scan.nextLine();
+				System.out.println(mail);
+				workouts = scan.nextLine();
+				System.out.println(workouts);
+				pw.println(name);
+				pw.println(birthday);
+				pw.println(gender);
+				pw.println(mail);
+				pw.println(workouts);
+			}
+			System.out.println("User added to file");
+			scan.close();
+			pw.flush();
+			pw.close();
+			File dump = new File(file);
+			newFile.renameTo(dump);
+		}
+		catch (Exception e)
+        {
+            System.err.println("Error: file could not be opened for updating.");
+            System.exit(1);
+        }
+	}
 
 
 
 	public static void main(String[] args) {
-		String file = "src/main/java/workoutplanner/persistence/allUsers.txt";
+		String file = "src/main/java/persistence/allUsers.txt";
 		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
 				"kevinco@ntnu.no","123","15/04/1998"
 				,'M');
@@ -155,26 +203,13 @@ private String file;
 				,'M');
 		allUsers.add(kevinco);
 		allUsers.add(anoj);
-		allUsers.add(kavu);
 		UsersPersistence up = new UsersPersistence(allUsers, file);
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
-		Workout workout = new Workout(kevinco,"Idag skal jeg dø",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette");
-		Workout workout2 = new Workout(kevinco,"RIP",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette");
-		kevinco.addMyWorkouts(workout);
-		kevinco.addMyWorkouts(workout2);
+		UsersPersistence y = new UsersPersistence(file);
 		up.writeFile();
+		y.addUserToFile(file, kavu);
 		up.readFile(file); 
 		System.out.println(kevinco.getMyWorkouts());
 	}
 
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> kevin2

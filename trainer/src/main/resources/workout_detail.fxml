@@ -5,31 +5,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.WorkoutDetailController">
    <children>
-      <Label layoutX="264.0" layoutY="42.0" text="Workout">
+      <Label fx:id="workout_name" layoutX="244.0" layoutY="42.0" prefHeight="26.0" prefWidth="186.0" text="Workout: ">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="buttonMainpage" onAction="backToMain" layoutX="528.0" layoutY="126.0" mnemonicParsing="false" text="To main page" />
-      <Button fx:id="buttonProfile" onAction="backToProfile" layoutX="550.0" layoutY="175.0" mnemonicParsing="false" text="To profile" />
-      <Button fx:id="signUpWorkout" onAction="signUpWorkout" layoutX="471.0" layoutY="383.0" mnemonicParsing="false" text="Sign up for this workout " />
-      <Label fx:id="WorkoutNameLabel" layoutX="66.0" layoutY="131.0" text="Name: " />
-      <Label fx:id="workout_name_field" id="workout_name_field" layoutX="117.0" layoutY="131.0" prefHeight="17.0" prefWidth="92.0" />
-      <Label layoutX="66.0" layoutY="158.0" text="Exercises:" />
-      <Label fx:id="Exercises_Field" id="Exercises_Field" layoutX="133.0" layoutY="158.0" prefHeight="17.0" prefWidth="92.0" />
-      <Label layoutX="66.0" layoutY="194.0" text="Description:" />
-      <Label fx:id="description_field" id="description_field" layoutX="148.0" layoutY="194.0" prefHeight="86.0" prefWidth="186.0" />
-      <Label layoutX="66.0" layoutY="287.0" text="Muscles:" />
-      <Label fx:id="muscles_field" id="muscles_field" layoutX="133.0" layoutY="287.0" prefHeight="17.0" prefWidth="149.0" />
-      <Label layoutX="66.0" layoutY="323.0" text="Date:" />
-      <Label fx:id="date_field" id="date_field" layoutX="133.0" layoutY="323.0" prefHeight="17.0" prefWidth="92.0" />
-      <Label layoutX="337.0" layoutY="131.0" text="Type:" />
-      <Label fx:id="type_field" id="type_field" layoutX="384.0" layoutY="131.0" prefHeight="17.0" prefWidth="66.0" />
-      <Label layoutX="337.0" layoutY="158.0" text="Category:" />
-      <Label fx:id="category_field" id="category_field" layoutX="402.0" layoutY="158.0" prefHeight="17.0" prefWidth="66.0" />
-      <Label layoutX="337.0" layoutY="194.0" text="Duration:" />
-      <Label fx:id="duration_field" id="duration_field" layoutX="402.0" layoutY="194.0" prefHeight="17.0" prefWidth="66.0" />
+      <Button fx:id="buttonMainpage" layoutX="528.0" layoutY="126.0" mnemonicParsing="false" onAction="#GoToMain" text="To main page" />
+      <Button fx:id="buttonProfile" layoutX="550.0" layoutY="175.0" mnemonicParsing="false" onAction="#goToProfile" text="To profile" />
+      <Button fx:id="subber_button" layoutX="471.0" layoutY="383.0" mnemonicParsing="false" onAction="#signUpWorkout" text="Sign up for this workout " />
+      <Label id="workout_name_field" fx:id="exercises_field" layoutX="140.0" layoutY="131.0" prefHeight="17.0" prefWidth="136.0" />
+      <Label fx:id="exercises_label" layoutX="68.0" layoutY="131.0" text="Exercises:" />
+      <Label id="Exercises_Field" fx:id="description_field" layoutX="69.0" layoutY="186.0" prefHeight="74.0" prefWidth="211.0" />
+      <Label fx:id="desc_label" layoutX="68.0" layoutY="158.0" text="Description:" />
+      <Label fx:id="muscles_label" layoutX="66.0" layoutY="287.0" text="Muscles:" />
+      <Label id="muscles_field" fx:id="muscles_field" layoutX="133.0" layoutY="287.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="date_label" layoutX="66.0" layoutY="323.0" text="Date:" />
+      <Label id="date_field" fx:id="date_field" layoutX="133.0" layoutY="323.0" prefHeight="17.0" prefWidth="136.0" />
+      <Label fx:id="type_label" layoutX="337.0" layoutY="131.0" text="Type:" />
+      <Label id="type_field" fx:id="type_field" layoutX="384.0" layoutY="131.0" prefHeight="17.0" prefWidth="123.0" />
+      <Label fx:id="category_label" layoutX="337.0" layoutY="158.0" text="Category:" />
+      <Label id="category_field" fx:id="category_field" layoutX="402.0" layoutY="158.0" prefHeight="17.0" prefWidth="123.0" />
+      <Label fx:id="duration_label" layoutX="337.0" layoutY="194.0" text="Duration:" />
+      <Label id="duration_field" fx:id="duration_field" layoutX="402.0" layoutY="194.0" prefHeight="17.0" prefWidth="123.0" />
+      <Label fx:id="createdBy" layoutX="244.0" layoutY="88.0" prefHeight="17.0" prefWidth="179.0" text="By:" />
    </children>
 </AnchorPane>

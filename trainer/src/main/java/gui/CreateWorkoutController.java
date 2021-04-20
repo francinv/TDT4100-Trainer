@@ -83,7 +83,7 @@ public class CreateWorkoutController {
     	int number_of_exercises = Integer.parseInt(NumberOfExercisesCreate.getText());
     	String description = description_field.getText();
     	getMuscles();
-    	LocalDate when = whenWorkoutCreate.getValue();
+    	String when = whenWorkoutCreate.getValue().toString();
     	String type = type_field.getValue();
     	getCategory();
     	String duration = duration_field.getValue();
@@ -92,12 +92,12 @@ public class CreateWorkoutController {
     	System.out.println(workout);
     	
     	UserProfilePersistence up = new UserProfilePersistence(thisuser, "src/main/java/persistence/userProfiles.txt");
-    	allWorkoutsPersistence workouts = new allWorkoutsPersistence("src/main/java/persistence/allworkouts.txt", allWorkouts);
+    	allWorkoutsPersistence workouts = new allWorkoutsPersistence("src/main/java/persistence/allworkouts.txt");
     	allWorkouts.add(workout);
     	thisuser.addMyWorkouts(workout);
     	try {
     		up.writeFile();
-    		workouts.writeFile();
+    		workouts.addWorkoutToFile("src/main/java/persistence/allworkouts.txt", workout);
     		
     	} catch(Exception e) {
     		e.printStackTrace();
@@ -123,50 +123,31 @@ public class CreateWorkoutController {
     private void getMuscles() {
     	if (chest_radio.isSelected()) {
     		muscles.add("Chest");
-    	} else {
-    		System.out.println("Chest not selected");
     	}
     	if (triceps_radio.isSelected()) {
     		muscles.add("Triceps");
-    	} else {
-    		System.out.println("Triceps not selected");
-    	}
+    	} 
     	if(back_radio.isSelected()) {
     		muscles.add("Back");
-    	} else {
-    		System.out.println("Back not selected");
-    	}
+    	} 
     	if(biceps_radio.isSelected()) {
     		muscles.add("Biceps");    		
-    	} else {
-    		System.out.println("Biceps not selected");
-    	}
+    	} 
     	if(shoulder_box.isSelected()) {
     		muscles.add("Shoulder");    		
-    	} else {
-    		System.out.println("Shoulder not selected");
-    	}
+    	} 
     	if(legs_box.isSelected()) {
     		muscles.add("Legs");
-    	} else {
-    		System.out.println("Legs not selected");
-    	}
+    	} 
     	if(glutes_box.isSelected()) {
     		muscles.add("Glutes");
-    	} else {
-    		System.out.println("Glutes not selected");
-    	}
+    	} 
      	if(core_box.isSelected()) {
     		muscles.add("Core");
-    	} else {
-    		System.out.println("Core not selected");
-    	}
+    	} 
      	if(other_box.isSelected()) {
     		muscles.add("Other");
-    	} else {
-    		System.out.println("Other not selected");
-    	}
-    	
+    	} 
     	System.out.println(muscles);
 	}
 

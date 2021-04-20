@@ -6,17 +6,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 import core.Userprofile;
 import core.Workout;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class WorkoutPersistence implements filePersistence{
 	
 	private Workout workout;
 	private String file;
+	public ArrayList<String> workoutlist = new ArrayList<String>();
 	
 	//"src/main/java/workoutplanner/persistence/workout.txt"
 	
@@ -37,8 +41,7 @@ public class WorkoutPersistence implements filePersistence{
             in = new Scanner(new FileReader(file));
              
             while(in.hasNext()){
-                String line = in.nextLine();
-                System.out.println(line);
+                workoutlist.add(in.next());
             }
              
             in.close();
@@ -57,7 +60,7 @@ public class WorkoutPersistence implements filePersistence{
 		System.out.println("Trying");
 		  try
 	        {
-	            PrintWriter outFile = new PrintWriter("src/main/java/workoutplanner/persistence/workout.txt");
+	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/workout.txt");
 	            outFile.println(workout);
 	            outFile.close();
 	            System.out.println("Done");
@@ -72,7 +75,7 @@ public class WorkoutPersistence implements filePersistence{
 	@Override
 	public void updateFile(String File, String wantedID, List<String> allSubs ) {
 		System.out.println("Trying to update file");
-		String tempFile = "src/main/java/workoutplanner/persistence/workoutTemp.txt";
+		String tempFile = "src/main/java/persistence/workoutTemp.txt";
 		File oldFile = new File(file);
 		File newFile = new File(tempFile);
 		String name = ""; String id = ""; String creator= ""; String when = ""; String duration = "";
@@ -82,7 +85,7 @@ public class WorkoutPersistence implements filePersistence{
 			FileWriter fw = new FileWriter(tempFile,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			scan = new Scanner(new File(file));
+			Scanner scan = new Scanner(new File(file));
 			//scan.useDelimiter("\n");
 
 			while(scan.hasNext()) {

@@ -1,6 +1,7 @@
 package core;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -15,8 +16,7 @@ public class Workout {
 	private List<String> muscles = new ArrayList<String>();
 	private List<String> muscleGroup = Arrays.asList("Chest","Triceps","Back","Biceps","Shoulder","legs",
 			"Glutes", "Core", "Other");
-	private String when1;
-	private LocalDate when;
+	private String when;
 	private Date today = new Date();
 	private String type;
 	private List<String> types = Arrays.asList("Strength", "Hypothraphy","Endurance");
@@ -31,43 +31,17 @@ public class Workout {
 	
 	
 	public Workout(Userprofile createdBy, String name, int amountOfExercises,
-			List<String> muscles, String when, String type, String category,
-			int duration, String description) {
-		this.name = name;
-		this.amountOfExercises = amountOfExercises;
-		this.muscles = muscles;
-		this.when1 = when;
-		this.type = type;
-		this.category = category;
-		this.duration = duration;
-		this.createdBy = createdBy;
-		this.description = description;
-	}
-	
-	public Workout(Userprofile createdBy, String name, int amountOfExercises,
-			List<String> muscles, String when, String type, String category,
-			int duration, String description, List<Userprofile> subbers) {
+			List<String> muscles, String when, String type, List<String> category,
+			String duration, String description, List<Userprofile> subbers) {
 		this(createdBy, name, amountOfExercises, muscles, when, type, category, 
 				duration, description);
 		this.subbers = subbers;
 		
 	}
 	
-	public Workout( String name, int amountOfExercises,
-			List<String> muscles, LocalDate when, String type, String category,
-			int duration, String description) {
-		this.name = name;
-		this.amountOfExercises = amountOfExercises;
-		this.muscles = muscles;
-		this.when1 = when;
-		this.type = type;
-		this.category = category;
-		this.duration = duration;
-		this.createdBy = createdBy;
-		this.description = description;
-	}
 
-	public Workout(Userprofile createdBy, String name, int amountOfExercises, List<String> muscles, LocalDate when, String type,
+
+	public Workout(Userprofile createdBy, String name, int amountOfExercises, List<String> muscles, String when, String type,
 			List<String> category, String duration, String description) {
 		this.createdBy = createdBy;
 		this.name = name;
@@ -79,6 +53,8 @@ public class Workout {
 		this.duration = duration;
 		this.description = description;
 	}
+
+
 
 	public Userprofile getCreater() {
 		return createdBy;
@@ -127,16 +103,16 @@ public class Workout {
 		
 	}
 	
-	public String getWhen() {
-		return when1;
+	public LocalDate getWhen() {
+		return when;
 	}
 	
-	public void setWhen(String when) {
+	public void setWhen(LocalDate when) {
 		/*if (when.before(today)) {
 			throw new IllegalArgumentException("The date is invalid");
 		}
 		*/
-		this.when1 = when;
+		this.when = when;
 	}
 	
 	
@@ -153,11 +129,11 @@ public class Workout {
 		}
 	}
 	
-	public String getCategory() {
+	public List<String> getCategory() {
 		return category;
 	}
 	
-	public void setCategory(String category) {
+	public void setCategory(List<String> category) {
 		if (categories.contains(category)) {
 			this.category = category;
 		}
@@ -166,11 +142,11 @@ public class Workout {
 		}
 	}
 	
-	public int getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 	
-	public void setDuration(int duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 	
@@ -212,33 +188,10 @@ public class Workout {
 				"Category: "+ category + "\n" +
 				"Muscles trained: "+ muscles + "\n" +
 				"Number of excercises: "+ amountOfExercises+ "\n" +
-				"Description: "+ description + "\n\n" ;
-				//"Users using your workout: "+ userNames + "\n\n"; 
+				"Description: "+ description + "\n" +
+				"Users using your workout: "+ userNames + "\n\n"; 
 				
 				
-	}
-	
-	
-	public static void main(String[] args) {
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
-		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile anoj = new Userprofile("Francin", "Vincent",
-				"francin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile kavu = new Userprofile("Kavusikan", "Sivasub",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		List<Userprofile>trainers = Arrays.asList(anoj,kavu);
-		Workout workout = new Workout(kevinco,"død",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette",trainers);
-		//System.out.println(kevinco);
-		System.out.println(workout);
-		System.out.println(workout.getUniqueID());
-	
 	}
 
 }

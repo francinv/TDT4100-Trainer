@@ -1,4 +1,4 @@
-package src.main.java.persistence;
+package persistence;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -76,7 +76,7 @@ public class allWorkoutsPersistence implements filePersistence {
 	@Override
 	public void updateFile(String File, String wantedID, List<String> allSubs ) {
 		System.out.println("Trying to update file");
-		String tempFile = "src/main/java/workoutplanner/persistence/workoutTemp.txt";
+		String tempFile = "src/main/java/persistence/workoutTemp.txt";
 		File oldFile = new File(file);
 		File newFile = new File(tempFile);
 		String name = ""; String id = ""; String creator= ""; String when = ""; String duration = "";
@@ -86,7 +86,7 @@ public class allWorkoutsPersistence implements filePersistence {
 			FileWriter fw = new FileWriter(tempFile,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			scan = new Scanner(new File(file));
+			Scanner scan = new Scanner(new File(file));
 			//scan.useDelimiter("\n");
 
 			while(scan.hasNext()) {
@@ -167,6 +167,79 @@ public class allWorkoutsPersistence implements filePersistence {
         }
 	}
 
+	public void addWorkoutToFile(String file, Workout workout) {
+		System.out.println("Trying to add workout to file");
+		String tempFile = "src/main/java/persistence/addWorkoutTemp.txt";
+		File oldFile = new File(file);
+		File newFile = new File(tempFile);
+		String name = ""; String id = ""; String creator= ""; String when = ""; String duration = "";
+		String type = ""; String category = ""; String muscles= ""; String excercises = "";
+		String description = ""; String subbers = "";
+		try {
+			FileWriter fw = new FileWriter(tempFile,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			Scanner scan = new Scanner(new File(file));
+			
+			while(scan.hasNext()) {
+				name = scan.nextLine();
+				if (name.equals("")) {
+					System.out.println(name);
+					name = scan.nextLine();
+					if (name.equals("]")) {
+						pw.println(", "+workout+"]");
+						break;
+					}
+				}
+				System.out.println(name);
+				id = scan.nextLine();
+				System.out.println(id);
+				creator = scan.nextLine();
+				System.out.println(creator);
+				when = scan.nextLine();
+				System.out.println(when);
+				duration = scan.nextLine();
+				System.out.println(duration);
+				type = scan.nextLine();
+				System.out.println(type);
+				category = scan.nextLine();
+				System.out.println(category);
+				muscles = scan.nextLine();
+				System.out.println(muscles);
+				excercises = scan.nextLine();
+				System.out.println(excercises);
+				description = scan.nextLine();
+				System.out.println(description);
+				subbers = scan.nextLine();
+				System.out.println(subbers);
+				pw.println(name);
+				pw.println(id);
+				pw.println(creator);
+				pw.println(when);
+				pw.println(duration);
+				pw.println(type);
+				pw.println(category);
+				pw.println(muscles);
+				pw.println(excercises);
+				pw.println(description);
+				pw.println(subbers);
+				pw.println("");
+				
+			}
+			System.out.println("Workout added to file");
+			scan.close();
+			pw.flush();
+			pw.close();
+			File dump = new File(file);
+			newFile.renameTo(dump);
+		}
+		catch (Exception e)
+        {
+            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+            System.exit(1);
+        }
+	}
+
 	public void findSubbs(String id, String file) {
 		Scanner scanner;
 		System.out.println("Trying to find subbers");
@@ -205,8 +278,11 @@ public class allWorkoutsPersistence implements filePersistence {
 	}
 	
 	public static void main(String[] args) {
-		String file = "src/main/java/workoutplanner/persistence/workout.txt";
+		String file = "src/main/java/persistence/workout.txt";
 		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
+		List<String> cat1 = Arrays.asList("push");
+		List<String> cat2 = Arrays.asList("pull");
+		
 		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
 				"kevin@mail.com","1234","15/04/1998"
 				,'M');
@@ -217,22 +293,12 @@ public class allWorkoutsPersistence implements filePersistence {
 				"kevin@mail.com","1234","15/04/1998"
 				,'M');
 		List<Userprofile>trainers = Arrays.asList(anoj,kavu);
-		Workout workout = new Workout(kevinco,"død",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette",trainers);
-		Workout workout2 = new Workout(anoj,"RIP",
-				5, gainz, "04-02-21",
-				"Strength","pull",2 ,
-				"Du skal svette");
-		Collection<Workout>workouts = Arrays.asList(workout,workout2);
-		allWorkoutsPersistence wp = new allWorkoutsPersistence(file,workouts);
-		wp.writeFile();
-		wp.readFile(file);
+		Workout workout = new Workout(kevinco, "DØDEN", 22, gainz, "19/04/2021", "Strength",cat1,"1-2","Slitsom økt",trainers);
+		
+		allWorkoutsPersistence wp = new allWorkoutsPersistence(file);
+		wp.addWorkoutToFile(file, workout);
+		wp.addWorkoutToFile(file, workout);
 	}
 
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> kevin2
