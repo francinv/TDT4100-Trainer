@@ -28,14 +28,15 @@ public class Workout {
 	private Userprofile createdBy;
 	private Userprofile subs;
 	private List<Userprofile> subbers = new ArrayList<Userprofile>();
+	private List<String> subbs = new ArrayList<String>();
 	
 	
 	public Workout(Userprofile createdBy, String name, int amountOfExercises,
 			List<String> muscles, String when, String type, List<String> category,
-			String duration, String description, List<Userprofile> subbers) {
+			String duration, String description, List<String> subbs) {
 		this(createdBy, name, amountOfExercises, muscles, when, type, category, 
 				duration, description);
-		this.subbers = subbers;
+		this.subbs = subbs;
 		
 	}
 	
@@ -53,6 +54,7 @@ public class Workout {
 		this.duration = duration;
 		this.description = description;
 	}
+
 
 
 
@@ -103,11 +105,11 @@ public class Workout {
 		
 	}
 	
-	public LocalDate getWhen() {
+	public String getWhen() {
 		return when;
 	}
 	
-	public void setWhen(LocalDate when) {
+	public void setWhen(String when) {
 		/*if (when.before(today)) {
 			throw new IllegalArgumentException("The date is invalid");
 		}
@@ -181,6 +183,7 @@ public class Workout {
 		};
 		return 
 				"Workoutname: "+ name +  "\n" +
+				"Workout ID: "+ uniqueID + "\n" +
 				"By: " + createdBy.getName() +"\n" +
 				"When: "+ when + "\n" +
 				"Duration: "+ duration + "\n" +

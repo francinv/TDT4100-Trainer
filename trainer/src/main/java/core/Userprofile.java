@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import main.java.workoutplanner.core.Workout;
+import core.Workout;
 
 public class Userprofile{
 
@@ -20,6 +20,7 @@ public class Userprofile{
 	private String email;
 	private String password;
 	private Collection<Workout>myWorkouts = new ArrayList<Workout>();
+	private List<String> allWorkouts = new ArrayList<String>();
 	
 	public Userprofile() {
 		
@@ -45,7 +46,7 @@ public class Userprofile{
 	
 	public Userprofile(String firstName, String lastName, String email, String password, String birthday,
 			char gender) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -54,6 +55,19 @@ public class Userprofile{
 		this.birthday = LocalDate.parse(birthday, formatter);
 		this.gender = gender;
 		
+	}
+
+	public Userprofile(String firstName, String lastName, String email, String password, String birthday,
+			char gender, List<String> allWorkouts) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.birthday = LocalDate.parse(birthday, formatter);
+		this.gender = gender;
+		this.allWorkouts = allWorkouts;
 	}
 
 	public String getName() {

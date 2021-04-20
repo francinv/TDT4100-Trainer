@@ -1,6 +1,7 @@
 package gui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class WorkoutListController {
 	
 	private ObservableList<String> workoutslist = FXCollections.observableArrayList();
 	private ObservableList<String> workoutnames = FXCollections.observableArrayList();
+	private List<String> subbers = new ArrayList<String>();
 	private ArrayList<String> user = new ArrayList<String>();
 	private String firstName;
 	private String lastName;
@@ -77,7 +79,6 @@ public class WorkoutListController {
 			int element = listIndex.get(x);
 			workoutnames.add(workoutslist.get(element));
 		}
-		System.out.println(workoutnames);
 		
 	}
 	
@@ -183,68 +184,71 @@ public class WorkoutListController {
 	
 	private void getWorkout() {
 		String name = listview_workouts.getSelectionModel().getSelectedItem();
-		wp.readFile("src/main/java/persistence/allworkouts.txt");
-		workoutslist = wp.allWorkouts;
-		System.out.println(workoutslist);
+		
 		int index = workoutslist.indexOf(name);
-		firstName = workoutslist.get(index + 2);
+		String ID = workoutslist.get(index + 3 );
+		firstName = workoutslist.get(index + 5);
+		System.out.println(workoutslist);
 		getUserOfWorkout();
 		Userprofile user = new Userprofile(firstName, lastName, mail, password, birthday, gender);
-		String when = workoutslist.get(index + 5);
-		String duration = workoutslist.get(index + 7);
-		String type = workoutslist.get(index + 9);
 		
+		String when = workoutslist.get(index + 8);
+		String duration = workoutslist.get(index + 10);
+		String type = workoutslist.get(index + 12);
+		System.out.println(index);
 		List<String> category = new ArrayList();
-		int indexOf = 0;
-		for (int i = index + 11 ; i < workoutslist.size(); i++) {
+		for (int i = index + 14  ; i < workoutslist.size(); i++) {
 			String element = workoutslist.get(i);
 			if(element.contains("Muscles")){
 				break;
 			}else {
-				indexOf = workoutslist.indexOf(element);
 				category.add(element);
+				index = workoutslist.indexOf(element);
 			}
 		}
 		List<String> muscles = new ArrayList();
-		for (int y = indexOf + 3 ; y < workoutslist.size(); y++) {
+		for (int y = index + 3 ; y < workoutslist.size(); y++) {
 			String element = workoutslist.get(y);
 			if(element.contains("Number")) {
 				break;
 			} else {
 				muscles.add(element);
+				index = workoutslist.indexOf(element);
 			}
 		}
-		
-		int amountOfExercises = Integer.parseInt(workoutslist.get(indexOf + 8));
+
+		int amountOfExercises = Integer.parseInt(workoutslist.get(index + 4 ));
 		
 		List<String> desclist = new ArrayList();
 		
-		for (int z = indexOf + 10 ; z < workoutslist.size(); z++) {
+		for (int z = index + 6 ; z < workoutslist.size(); z++) {
 			String element = workoutslist.get(z);
 			if(element.contains("Users")) {
 				break;
 			} else {
 				desclist.add(element);
+				index = workoutslist.indexOf(element);
 			}
 		}
 		
 		String description = desclist.toString();
+		List<String> subbers = new ArrayList();
 		
-		List<Userprofile> subbers = new ArrayList();
-		
-		for (int c = indexOf + 16 ; c < workoutslist.size(); c++) {
+		for (int c = index + 13 ; c < workoutslist.size(); c++) {
 			String element = workoutslist.get(c);
 			if(element.contains("]")) {
 				break;
 			} else {
-				subbers.add(user);
+				subbers.add(element);
 			}
 		}
+
+		
 		
 		Workout workout = new Workout(user, name, amountOfExercises, muscles, when, type, category, duration, description, subbers );
 		
-		WorkoutPersistence wp = new WorkoutPersistence(workout, "src/main/java/persistence/workout.txt");
-		wp.writeFile();
+		WorkoutPersistence w = new WorkoutPersistence(workout, "src/main/java/persistence/workout.txt");
+		w.writeFile();
 		
 	}
 
@@ -254,6 +258,7 @@ public class WorkoutListController {
 		user = up.list;
 		System.out.println(user);
 		int index = user.indexOf(firstName);
+		System.out.println(index);
 		lastName = user.get(index +1);
 		birthday = user.get(index + 3);
 		gender = user.get(index + 5).charAt(0);
@@ -269,17 +274,6 @@ public class WorkoutListController {
 				user.add(element);
 			}
 		}
-		
-		
-    	System.out.println(firstName);
-    	System.out.println(index);
-    	System.out.println(lastName);
-    	
-    	System.out.println(birthday);
-    	System.out.println(gender);
-    	System.out.println(mail);
-    	System.out.println(password);
-    	System.out.println(myworkouts);
 	}
 }
 

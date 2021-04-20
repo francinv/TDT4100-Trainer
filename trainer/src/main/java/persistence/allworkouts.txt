@@ -1,12 +1,13 @@
-[Workoutname: hello
-By: Pravin Thevakan
+[Workoutname: DEAD
+Workout ID: 335bdd14-5e7c-468c-86fa-36809c0b3a05
+By: Kevin Cornolis
 When: 2021-04-20
 Duration: 1-2
 Workouttype: Hypothraphy
 Category: [Push]
 Muscles trained: [Chest, Triceps]
-Number of excercises: 32
-Description: hello hello
+Number of excercises: 33
+Description: Test test test
 Users using your workout: []
 
 ]

@@ -1,8 +1,8 @@
-Navn: Kevin Cornolis
-birthday: 2021-04-13
+Navn: Francin Vincent
+birthday: 2020-12-16
 gender: M
-email: kevin@mail.com
-password: test
-Workouts: [test]
+email: francin@mail.com
+password: hello
+Workouts: []
 
 

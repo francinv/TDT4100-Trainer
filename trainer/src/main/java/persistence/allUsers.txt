@@ -1,8 +1,22 @@
 [Navn: Kevin Cornolis
-birthday: 2021-04-13
+birthday: 2020-12-15
 gender: M
 email: kevin@mail.com
 password: test
+Workouts: []
+
+, Navn: Francin Vincent
+birthday: 2020-12-16
+gender: M
+email: francin@mail.com
+password: hello
+Workouts: []
+
+, Navn: Test testesen
+birthday: 2020-12-17
+gender: M
+email: test@mail.com
+password: yess
 Workouts: []
 
 ]

@@ -89,15 +89,16 @@ public class CreateWorkoutController {
     	String duration = duration_field.getValue();
     	
     	Workout workout = new Workout(thisuser, name, number_of_exercises, muscles, when, type, category,duration, description);
-    	System.out.println(workout);
     	
     	UserProfilePersistence up = new UserProfilePersistence(thisuser, "src/main/java/persistence/userProfiles.txt");
-    	allWorkoutsPersistence workouts = new allWorkoutsPersistence("src/main/java/persistence/allworkouts.txt");
+    	String file = "src/main/java/persistence/allworkout.txt";
+    	allWorkoutsPersistence workouts = new allWorkoutsPersistence(file, allWorkouts);
     	allWorkouts.add(workout);
     	thisuser.addMyWorkouts(workout);
     	try {
+    		workouts.writeFile();
     		up.writeFile();
-    		workouts.addWorkoutToFile("src/main/java/persistence/allworkouts.txt", workout);
+    		
     		
     	} catch(Exception e) {
     		e.printStackTrace();
