@@ -32,6 +32,18 @@ Category: [Legs, Lower]
 Muscles: [Legs, Glutes]
 Exercises: 20
 Description: Test test test hello
+Users using your workout: [Francin Vincent]
+
+, Workoutname: Trening40
+WorkoutID: b854fd72-76a7-4278-b77b-f3f011598409
+By: Francin Vincent
+When: 2021-04-28
+Duration: 2-3
+Workouttype: Hypothraphy
+Category: [Pull, Upper]
+Muscles: [Back, Biceps, Shoulder]
+Exercises: 32
+Description: Jeg skal trene med noen, en lang økt.
 Users using your workout: []
 
 ]

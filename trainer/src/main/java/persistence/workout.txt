@@ -1,13 +1,13 @@
-Workoutname: Sistetestworkout
-WorkoutID: dfe9caf0-beea-459e-b160-c21e8cdb0562
+Workoutname: Studassøkta
+WorkoutID: cd854363-f158-43c1-81c9-346ea58e2b87
 By: Test Testesen
-When: 2021-04-27
-Duration: 0-1
-Workouttype: Endurance
-Category: [[Legs,, Lower]]
-Muscles: [[Legs,, Glutes]]
-Exercises: 20
-Description: [Test, test, test, hello]
+When: 2021-04-28
+Duration: 1-2
+Workouttype: Hypothraphy
+Category: [[Push]]
+Muscles: [[Chest,, Triceps], Excercises:, 22, Description:, Kul, økt, med, studass, Users, using, your, workout:, [Studass, Spangelo], ,, Workoutname:, test32, WorkoutID:, d99b79e7-621c-4e41-baf8-cee8c0ddcbb2, By:, Studass, Spangelo, When:, 2021-04-28, Duration:, 0-1, Workouttype:, Strength, Category:, [Push], Muscles:, [Chest]]
+Exercises: 32
+Description: [test]
 Users using your workout: []
 
 

@@ -76,7 +76,7 @@ public class CreateWorkoutController {
     
     //PERSISTENCE
     private String fileup = "src/main/java/persistence/userProfiles.txt";
-    private String workoutfile = "src/main/java/persistence/allworkout.txt";
+    private String workoutfile = "src/main/java/persistence/allworkouts.txt";
     
     private allWorkoutsPersistence workouts = new allWorkoutsPersistence(workoutfile);
     private UserProfilePersistence up = new UserProfilePersistence(thisuser,fileup);

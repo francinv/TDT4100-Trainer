@@ -1,8 +1,8 @@
-Navn: Test Testesen
-birthday: 2021-04-21
+Navn: Francin Vincent
+birthday: 2021-04-19
 gender: M
-email: test@gmail.no
-password: Test12345
-Workouts: [Sistetestworkout]
+email: francin@mail.com
+password: Hello12345
+Workouts: [Trening40]
 
 

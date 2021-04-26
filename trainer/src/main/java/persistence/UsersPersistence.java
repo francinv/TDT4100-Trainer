@@ -130,14 +130,14 @@ public class UsersPersistence implements filePersistence {
 		}
 		catch (Exception e)
         {
-            System.err.println("Error: " + file + "could not be opened for updating.");
+            System.err.println("Error: " + file + " could not be opened for updating.");
             System.exit(1);
         }
 	}
 	
 	
 	////This method updates the file containg all users with a new user that have registered
-	public void addUserToFile( Userprofile user) {
+	public void addUserToFile(Userprofile user) {
 		System.out.println("Trying to update file");
 		String tempFile = "src/main/java/persistence/addUserTemp.txt";
 		File newFile = new File(tempFile);
@@ -146,7 +146,7 @@ public class UsersPersistence implements filePersistence {
 			FileWriter fw = new FileWriter(tempFile,true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
-			Scanner scan = new Scanner(new File(file));
+			Scanner scan = new Scanner(new File("src/main/java/persistence/allUsers.txt"));
 			
 			while(scan.hasNext()) {
 				name = scan.nextLine();
@@ -171,7 +171,7 @@ public class UsersPersistence implements filePersistence {
 			scan.close();
 			pw.flush();
 			pw.close();
-			File dump = new File(file);
+			File dump = new File("src/main/java/persistence/allUsers.txt");
 			newFile.renameTo(dump);
 		}
 		catch (Exception e)

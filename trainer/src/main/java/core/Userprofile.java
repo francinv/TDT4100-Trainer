@@ -174,7 +174,7 @@ public class Userprofile{
 				+ "gender: " + gender + "\n"
 				+ "email: " + email + "\n"
 				+ "password: " + password + "\n" 
-				+ "Workouts: " + workoutNames + "\n\n";
+				+ "Workouts: " + workoutNames + "\n";
 	}
 	
 	

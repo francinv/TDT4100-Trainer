@@ -10,5 +10,16 @@ gender: M
 email: studass@mail.no
 password: Test12345
 Workouts: []
+, Navn: Francin Vincent
+birthday: 2021-04-19
+gender: M
+email: francin@mail.com
+password: Hello12345
+Workouts: []
+, Navn: Kevin Cornolis
+birthday: 2021-04-19
+gender: M
+email: kevin@mail.com
+password: Kevin12345
+Workouts: []
 ]
-s
