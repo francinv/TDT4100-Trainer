@@ -4,60 +4,65 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class Workout {
-
+	
+	//variables
+	
 	private String name;
 	private String uniqueID = UUID.randomUUID().toString();
 	private int amountOfExercises;
 	private List<String> muscles = new ArrayList<String>();
 	private List<String> muscleGroup = Arrays.asList("Chest","Triceps","Back","Biceps","Shoulder","legs",
 			"Glutes", "Core", "Other");
-	private String when;
-	private Date today = new Date();
+	private LocalDate when;
+	private LocalDate today = LocalDate.now();
 	private String type;
 	private List<String> types = Arrays.asList("Strength", "Hypothraphy","Endurance");
-	private List<String> category = new ArrayList<String>();
-	private List<String> categories = Arrays.asList("Push", "Pull", "Legs","Upper body","Lower body"
+	private List<String> categories = new ArrayList<String>();
+	private List<String> categoriesGroup = Arrays.asList("Push", "Pull", "Legs","Upper body","Lower body"
 			,"Full body", "Cardio"); 
 	private String duration;
 	private String description;
 	private Userprofile createdBy;
-	private Userprofile subs;
 	private List<Userprofile> subbers = new ArrayList<Userprofile>();
-	private List<String> subbs = new ArrayList<String>();
 	
 	
-	public Workout(Userprofile createdBy, String name, int amountOfExercises,
-			List<String> muscles, String when, String type, List<String> category,
-			String duration, String description, List<String> subbs) {
-		this(createdBy, name, amountOfExercises, muscles, when, type, category, 
-				duration, description);
-		this.subbs = subbs;
+	//Constructers
+	
+	public Workout () {
 		
 	}
 	
-
-
-	public Workout(Userprofile createdBy, String name, int amountOfExercises, List<String> muscles, String when, String type,
-			List<String> category, String duration, String description) {
-		this.createdBy = createdBy;
+	public Workout(Userprofile createdBy, String name, int amountOfExercises,
+			List<String> muscles, String when, String type, List<String> categories,
+			String duration, String description) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
 		this.name = name;
 		this.amountOfExercises = amountOfExercises;
 		this.muscles = muscles;
-		this.when = when;
+		this.when = LocalDate.parse(when, formatter);
 		this.type = type;
-		this.category = category;
+		this.categories = categories;
 		this.duration = duration;
+		this.createdBy = createdBy;
 		this.description = description;
 	}
-
-
-
-
+	
+	public Workout(Userprofile createdBy, String name, int amountOfExercises,
+			List<String> muscles, String when, String type, List<String> categories,
+			String duration, String description, List<Userprofile> subbers) {
+		this(createdBy, name, amountOfExercises, muscles, when, type, categories, 
+				duration, description);
+		this.subbers = subbers;
+		
+	}
+	
+	//Getters and Setters
+	
 	public Userprofile getCreater() {
 		return createdBy;
 	}
@@ -95,25 +100,18 @@ public class Workout {
 		return muscles;
 	}
 	
-	public void setMuscles(String muscle) {
-		if (muscleGroup.contains(muscle)) {
-			muscles.add(muscle);
-		}
-		else{
-			throw new IllegalArgumentException("Error");
-		}
-		
+	public void setMuscles(List<String> muscles) {
+		this.muscles = muscles;
 	}
 	
-	public String getWhen() {
+	public LocalDate getWhen() {
 		return when;
 	}
 	
-	public void setWhen(String when) {
-		/*if (when.before(today)) {
-			throw new IllegalArgumentException("The date is invalid");
+	public void setWhen(LocalDate when) {
+		if(when.isBefore(today)) {
+			throw new IllegalArgumentException("Chosen date is before today, that is not possible.");
 		}
-		*/
 		this.when = when;
 	}
 	
@@ -127,21 +125,16 @@ public class Workout {
 			this.type = type;
 		}
 		else{
-			throw new IllegalArgumentException("Error");
+			throw new IllegalArgumentException("Chosen type is not accepted.");
 		}
 	}
 	
 	public List<String> getCategory() {
-		return category;
+		return categories;
 	}
 	
-	public void setCategory(List<String> category) {
-		if (categories.contains(category)) {
-			this.category = category;
-		}
-		else{
-			throw new IllegalArgumentException("Error");
-		}
+	public void setCategory(List<String> categories) {
+		this.categories = categories;
 	}
 	
 	public String getDuration() {
@@ -176,6 +169,9 @@ public class Workout {
 		subbers.add(sub);
 	}
 	
+	//toString method
+	//This method defines how the persistence class will write to file
+	
 	public String toString() {
 		List<String> userNames = new ArrayList<String>();
 		for (Userprofile user : subbers) {
@@ -183,18 +179,18 @@ public class Workout {
 		};
 		return 
 				"Workoutname: "+ name +  "\n" +
-				"Workout ID: "+ uniqueID + "\n" +
+				"WorkoutID: "+ uniqueID + "\n"+
 				"By: " + createdBy.getName() +"\n" +
 				"When: "+ when + "\n" +
 				"Duration: "+ duration + "\n" +
 				"Workouttype: "+ type + "\n" +
-				"Category: "+ category + "\n" +
-				"Muscles trained: "+ muscles + "\n" +
-				"Number of excercises: "+ amountOfExercises+ "\n" +
-				"Description: "+ description + "\n" +
+				"Category: "+ categories + "\n" +
+				"Muscles: "+ muscles + "\n" +
+				"Exercises: "+ amountOfExercises+ "\n" +
+				"Description: "+ description + "\n" + 
 				"Users using your workout: "+ userNames + "\n\n"; 
 				
 				
 	}
-
+	
 }

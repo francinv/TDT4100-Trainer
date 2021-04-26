@@ -1,13 +1,13 @@
-Workoutname: DEAD
-Workout ID: 22a5b40f-9752-4372-ad8e-f4465d7d27d0
-By: Kevin Cornolis
-When: 2021-04-20
-Duration: 1-2
-Workouttype: Hypothraphy
-Category: [[Push]]
-Muscles trained: [[Chest,, Triceps]]
-Number of excercises: 33
-Description: [Test, test, test]
+Workoutname: Sistetestworkout
+WorkoutID: dfe9caf0-beea-459e-b160-c21e8cdb0562
+By: Test Testesen
+When: 2021-04-27
+Duration: 0-1
+Workouttype: Endurance
+Category: [[Legs,, Lower]]
+Muscles: [[Legs,, Glutes]]
+Exercises: 20
+Description: [Test, test, test, hello]
 Users using your workout: []
 
 

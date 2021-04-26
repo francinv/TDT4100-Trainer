@@ -7,20 +7,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.Scanner;
 
 import core.Userprofile;
-import core.Workout;
 
 public class UsersPersistence implements filePersistence {
-
-private Collection<Userprofile> allUsers = new ArrayList<Userprofile>();
-public ArrayList<String> list = new ArrayList<String>();
-private String file;
 	
+	//Variables
+	private Collection<Userprofile> allUsers = new ArrayList<Userprofile>();
+	public ArrayList<String> list = new ArrayList<String>();
+	private String file;
+	
+	
+	//Constructors
 	public UsersPersistence(String file) {
 		this.file = file;
 	}
@@ -29,7 +29,8 @@ private String file;
 		this.allUsers = allUsers;
 		this.file = file;
 	}
-
+	
+	//Method for reading file
 	@Override
 	public void readFile(String file) {
 		Scanner in;
@@ -41,7 +42,6 @@ private String file;
 
             while(in.hasNext()){
             	list.add(in.next());
-                //String line = in.nextLine();
 
             }
             System.out.println(list);
@@ -50,12 +50,14 @@ private String file;
         }
         catch (FileNotFoundException e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened. Does it exist?");
+            System.err.println("Error: file " + file +  "could not be opened. Does it exist?");
             System.exit(1);
         }
 		
 	}
 
+	
+	//Method for writing file
 	@Override
 	public void writeFile() {
 		System.out.println("Trying to write file");
@@ -64,22 +66,23 @@ private String file;
 	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/allUsers.txt");
 	            outFile.println(allUsers);
 	            outFile.close();
-	            System.out.println("Done");
+	            System.out.println("Writing finished.");
 	        }
 	        catch (FileNotFoundException e)
 	        {
-	            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+	            System.err.println("Error: file " + file + "could not be opened for writing.");
 	            System.exit(1);
 	        }
 	   
 		
 	}
 	
+	
+	//These method updates the textfile containing all users with the workouts they have subbed on
 	@Override
-	public void updateFile(String file, String email, List<String> trening  ) {
+	public void updateFile(String file, String email, Collection<String> trening  ) {
 		System.out.println("Trying to update file");
-		String tempFile = "src/main/java/workoutplanner/persistence/userProfilesTemp.txt";
-		File oldFile = new File(file);
+		String tempFile = "src/main/java/persistence/userProfilesTemp.txt";
 		File newFile = new File(tempFile);
 		String name = ""; String birthday = ""; String gender = ""; String mail = ""; String workouts = "";
 		try {
@@ -87,34 +90,26 @@ private String file;
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			Scanner scan = new Scanner(new File(file));
-			//scan.useDelimiter(",");
 
 			while(scan.hasNext()) {
 				name = scan.nextLine();
-				System.out.println(name);
 				if (name.equals("")) {
 					pw.println("]");
 					break;
 				}
 				birthday = scan.nextLine();
-				System.out.println(birthday);
 				gender = scan.nextLine();
-				System.out.println(gender);
 				mail = scan.nextLine();
-				System.out.println(mail);
 				String mail2 = mail.substring(7);
-				System.out.println(mail2);
 				workouts = scan.nextLine();
-				System.out.println(workouts);
-				System.out.println("sqrtsqrt");
-				System.out.println(scan.hasNext());
+				
 				if(mail2.equals(email)) {
 					pw.println(name);
 					pw.println(birthday);
 					pw.println(gender);
 					pw.println(mail);
 					pw.println("Workouts: "+trening);
-					System.out.println("endret trening");
+					System.out.println("Workout changed.");
 
 				}
 				else{
@@ -123,7 +118,7 @@ private String file;
 					pw.println(gender);
 					pw.println(mail);
 					pw.println(workouts);
-					System.out.println("skrev trening");
+					System.out.println("Workout writed.");
 				}
 			}
 			System.out.println("Updating finished");
@@ -135,17 +130,18 @@ private String file;
 		}
 		catch (Exception e)
         {
-            System.err.println("Error: file could not be opened for updating.");
+            System.err.println("Error: " + file + "could not be opened for updating.");
             System.exit(1);
         }
 	}
 	
-	public void addUserToFile(String file, Userprofile user) {
+	
+	////This method updates the file containg all users with a new user that have registered
+	public void addUserToFile( Userprofile user) {
 		System.out.println("Trying to update file");
 		String tempFile = "src/main/java/persistence/addUserTemp.txt";
-		File oldFile = new File(file);
 		File newFile = new File(tempFile);
-		String name = ""; String birthday = ""; String gender = ""; String mail = ""; String workouts = ""; 
+		String name = ""; String birthday = ""; String gender = ""; String mail = ""; String workouts = ""; String password = "";
 		try {
 			FileWriter fw = new FileWriter(tempFile,true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -154,23 +150,21 @@ private String file;
 			
 			while(scan.hasNext()) {
 				name = scan.nextLine();
-				System.out.println(name);
 				if (name.equals("]")) {
 					pw.println(", "+user+"]");
 					break;
 				}
 				birthday = scan.nextLine();
-				System.out.println(birthday);
 				gender = scan.nextLine();
-				System.out.println(gender);
 				mail = scan.nextLine();
-				System.out.println(mail);
+				password = scan.nextLine();
 				workouts = scan.nextLine();
-				System.out.println(workouts);
+
 				pw.println(name);
 				pw.println(birthday);
 				pw.println(gender);
 				pw.println(mail);
+				pw.println(password);
 				pw.println(workouts);
 			}
 			System.out.println("User added to file");
@@ -182,34 +176,9 @@ private String file;
 		}
 		catch (Exception e)
         {
-            System.err.println("Error: file could not be opened for updating.");
+            System.err.println("Error: " + file + "could not be opened for updating.");
             System.exit(1);
         }
 	}
-
-
-
-	public static void main(String[] args) {
-		String file = "src/main/java/persistence/allUsers.txt";
-		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevinco@ntnu.no","123","15/04/1998"
-				,'M');
-		Collection<Userprofile> allUsers = new ArrayList<Userprofile>();
-		Userprofile anoj = new Userprofile("Francin", "Vincent",
-				"francin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile kavu = new Userprofile("Kavusikan", "Sivasub",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		allUsers.add(kevinco);
-		allUsers.add(anoj);
-		UsersPersistence up = new UsersPersistence(allUsers, file);
-		UsersPersistence y = new UsersPersistence(file);
-		up.writeFile();
-		y.addUserToFile(file, kavu);
-		up.readFile(file); 
-		System.out.println(kevinco.getMyWorkouts());
-	}
-
 }
 

@@ -1,23 +1,26 @@
 package persistence;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 import java.util.Scanner;
 
 import core.Userprofile;
-import core.Workout;
 
 public class UserProfilePersistence implements filePersistence {
 	
-private Userprofile user;
-private String file;
+	//Varaiables
+	private Userprofile user;
+	private String file;
 
-public ArrayList<String> loggedin = new ArrayList<String>();
+	public ArrayList<String> loggedin = new ArrayList<String>();
 	
+	//Constructors
 	public UserProfilePersistence(String file) {
 		this.file = file;
 	}
@@ -27,6 +30,7 @@ public ArrayList<String> loggedin = new ArrayList<String>();
 		this.file = file;
 	}
 
+	//Method for reading file
 	@Override
 	public void readFile(String file) {
 		Scanner in;
@@ -44,12 +48,13 @@ public ArrayList<String> loggedin = new ArrayList<String>();
         }
         catch (FileNotFoundException e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened. Does it exist?");
+            System.err.println("Error: file " + file + "could not be opened. Does it exist?");
             System.exit(1);
         }
 		
 	}
 
+	//Method for writing to file.
 	@Override
 	public void writeFile() {
 		System.out.println("Trying to write file");
@@ -58,37 +63,68 @@ public ArrayList<String> loggedin = new ArrayList<String>();
 	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/userProfiles.txt");
 	            outFile.println(user);
 	            outFile.close();
-	            System.out.println("Done");
+	            System.out.println("Writing finished.");
 	        }
 	        catch (FileNotFoundException e)
 	        {
-	            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+	            System.err.println("Error: file " + file + "could not be opened for writing.");
 	            System.exit(1);
 	        }
 	   
 		
 	}
-	
-	public static void main(String[] args) {
-		String file = "src/main/java/persistence/userProfiles.txt";
-		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevinco@ntnu.no","123","15/04/1998"
-				,'M');
-		UserProfilePersistence up = new UserProfilePersistence(kevinco, file);
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
-		Workout workout = new Workout(kevinco,"Idag skal jeg dø",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette");
-		Workout workout2 = new Workout(kevinco,"RIP",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette");
-		kevinco.addMyWorkouts(workout);
-		kevinco.addMyWorkouts(workout2);
-		up.writeFile();
-		up.readFile(file); 
-		System.out.println(kevinco.getMyWorkouts());
-	}
 
+	
+	//Updates the userprofile textfile with the newly subbed subber
+	@Override
+	public void updateFile(String file, String wantedID, Collection<String> trening) {
+		System.out.println("Trying to update file");
+		String tempFile = "src/main/java/workoutplanner/persistence/userProfilesTemp.txt";
+		File newFile = new File(tempFile);
+		String name = ""; String birthday = ""; String gender = ""; String mail = ""; String workouts = ""; 
+		try {
+			FileWriter fw = new FileWriter(tempFile,true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			Scanner scan = new Scanner(new File(file));
+			
+			while(scan.hasNext()) {
+				name = scan.nextLine();
+				birthday = scan.nextLine();
+				gender = scan.nextLine();
+				mail = scan.nextLine();
+				String mail2 = mail.substring(7);
+				workouts = scan.nextLine();
+				if(mail2.equals(mail)) {
+					System.out.println("derp");
+					pw.println(name);
+					pw.println(birthday);
+					pw.println(gender);
+					pw.println(mail);
+					pw.println("Workouts: "+trening);
+					
+				}
+				else{
+					pw.println(name);
+					pw.println(birthday);
+					pw.println(gender);
+					pw.println(mail);
+					pw.println(workouts);
+				}
+			}
+			System.out.println("Updating finished");
+			scan.close();
+			pw.flush();
+			pw.close();
+			File dump = new File(file);
+			newFile.renameTo(dump);
+		}
+		catch (Exception e)
+        {
+            System.err.println("Error: file " + file + " could not be opened for writing.");
+            System.exit(1);
+        }
+	}
 }
+
+

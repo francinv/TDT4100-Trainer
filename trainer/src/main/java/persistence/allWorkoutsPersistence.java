@@ -7,27 +7,26 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
-import core.Subs;
-import core.Userprofile;
 import core.Workout;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class allWorkoutsPersistence implements filePersistence {
 	
+	//Variables
 	private Collection<Workout> workouts = new ArrayList<Workout>();
 	public ObservableList<String> allWorkouts = FXCollections.observableArrayList();
 	private String file;
 	private Scanner scan;
-	public String[] subbs;
+	public ArrayList<String> subbs = new ArrayList<String>();
+	public ArrayList<String> workoutsSubbedOn = new ArrayList<String>();
 	
 	
-	
+	//Constuctors
 	public allWorkoutsPersistence(String file) {
 		this.file=file;
 	}
@@ -38,6 +37,7 @@ public class allWorkoutsPersistence implements filePersistence {
 	}
 		
 	
+	//Read method
 	@Override
 	public void readFile(String file) {
 		Scanner in;
@@ -55,31 +55,35 @@ public class allWorkoutsPersistence implements filePersistence {
         }
         catch (FileNotFoundException e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened. Does it exist?");
+            System.err.println("Error: file" + file + "could not be opened. Does it exist?");
             System.exit(1);
         }
 		
 	}
 
+	
+	//Write method
 	@Override
 	public void writeFile() {
-		System.out.println("Trying");
+		System.out.println("Trying to write file.");
 		  try
 	        {
 	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/allworkouts.txt");
 	            outFile.println(workouts);
 	            outFile.close();
-	            System.out.println("Done");
+	            System.out.println("Writing finished.");
 	        }
 	        catch (FileNotFoundException e)
 	        {
-	            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+	            System.err.println("Error: file " + file + "could not be opened for writing.");
 	            System.exit(1);
 	        }
 	}
 
+
+	//This method updates the allWorkout text file with the wich user have subbed on a workout
 	@Override
-	public void updateFile(String File, String wantedID, Collection<Userprofile> allSubs ) {
+	public void updateFile(String file, String wantedID, Collection<String> allSubs ) {
 		System.out.println("Trying to update file");
 		String tempFile = "src/main/java/persistence/workoutTemp.txt";
 		File oldFile = new File(file);
@@ -92,7 +96,6 @@ public class allWorkoutsPersistence implements filePersistence {
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			scan = new Scanner(new File(file));
-			//scan.useDelimiter("\n");
 			
 			while(scan.hasNext()) {
 				name = scan.nextLine();
@@ -103,31 +106,21 @@ public class allWorkoutsPersistence implements filePersistence {
 						break;
 					}
 				}
-				System.out.println(name);
 				id = scan.nextLine();
-				System.out.println(id);
 				creator = scan.nextLine();
-				System.out.println(creator);
 				when = scan.nextLine();
-				System.out.println(when);
 				duration = scan.nextLine();
-				System.out.println(duration);
 				type = scan.nextLine();
-				System.out.println(type);
 				category = scan.nextLine();
-				System.out.println(category);
 				muscles = scan.nextLine();
-				System.out.println(muscles);
 				excercises = scan.nextLine();
-				System.out.println(excercises);
 				description = scan.nextLine();
-				System.out.println(description);
 				subbers = scan.nextLine();
-				System.out.println(subbers);
-				String id2 = id.substring(12);
-				System.out.println(id2);
-				if(id2.equals(wantedID)) {
-					System.out.println("derp");
+				
+				String[] id2 = name.split(":");
+				String name2 = id2[1].substring(1);
+
+				if(name2.equals(wantedID)) {
 					pw.println(name);
 					pw.println(id);
 					pw.println(creator);
@@ -140,7 +133,7 @@ public class allWorkoutsPersistence implements filePersistence {
 					pw.println(description);
 					pw.println("Users using your workout: " + allSubs);
 					pw.println("");
-					System.out.println("endret");	
+					System.out.println("Updated.");	
 				}
 				else{
 					pw.println(name);
@@ -155,7 +148,7 @@ public class allWorkoutsPersistence implements filePersistence {
 					pw.println(description);
 					pw.println(subbers);
 					pw.println("");
-					System.out.println("endret");
+					System.out.println("Updated.");
 				}
 			}
 			System.out.println("Updating finished");
@@ -167,11 +160,13 @@ public class allWorkoutsPersistence implements filePersistence {
 		}
 		catch (Exception e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+            System.err.println("Error: file " + file + "could not be opened for writing.");
             System.exit(1);
         }
 	}
 		  
+	
+	//This method finds all subbers to a workout
 	public void findSubbs(String id, String file) {
 		Scanner scanner;
 		System.out.println("Trying to find subbers");
@@ -193,25 +188,28 @@ public class allWorkoutsPersistence implements filePersistence {
             	for (int i = 0; i < 9; i++) {
             		  line = scanner.nextLine();
             		}
-				subbs  = line.split(":");
+				String[] sub  = line.split(":");
             	if(workoutID.substring(12).equals(id)) {
             		String[] names = name.split(":");
-            		System.out.println("The workout "+names[1].substring(1)+", has these subbers: "+ subbs[1]);
+            		subbs.add(sub[1].substring(1));
             	}
             }
-            System.out.println("All subbers found");
+            System.out.println("All subbers found.");
         }
         catch (FileNotFoundException e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened. Does it exist?");
+            System.err.println("Error: file "+ file + "could not be opened. Does it exist?");
             System.exit(1);
         }
 		
 	}
-	public void addWorkoutToFile(String file, Workout workout) {
+	
+	
+	//This method adds a newly made workout to the workout text file;
+	public void addWorkoutToFile(Workout workout) {
 		System.out.println("Trying to add workout to file");
 		String tempFile = "src/main/java/persistence/addWorkoutTemp.txt";
-		File oldFile = new File(file);
+		File oldFile = new File("src/main/java/persistence/allworkouts.txt");
 		File newFile = new File(tempFile);
 		String name = ""; String id = ""; String creator= ""; String when = ""; String duration = "";
 		String type = ""; String category = ""; String muscles= ""; String excercises = "";
@@ -224,41 +222,31 @@ public class allWorkoutsPersistence implements filePersistence {
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			
-			scan = new Scanner(new File(file));
-			System.out.println("hello");
+			Scanner scan = new Scanner(new File("src/main/java/persistence/allworkouts.txt"));
+			
 			
 			
 			while(scan.hasNext()) {
 				name = scan.nextLine();
 				if (name.equals("")) {
-					System.out.println(name);
 					name = scan.nextLine();
 					if (name.equals("]")) {
 						pw.println(", "+workout+"]");
 						break;
 					}
 				}
-				System.out.println(name);
+
 				id = scan.nextLine();
-				System.out.println(id);
 				creator = scan.nextLine();
-				System.out.println(creator);
 				when = scan.nextLine();
-				System.out.println(when);
 				duration = scan.nextLine();
-				System.out.println(duration);
 				type = scan.nextLine();
-				System.out.println(type);
 				category = scan.nextLine();
-				System.out.println(category);
 				muscles = scan.nextLine();
-				System.out.println(muscles);
 				excercises = scan.nextLine();
-				System.out.println(excercises);
 				description = scan.nextLine();
-				System.out.println(description);
 				subbers = scan.nextLine();
-				System.out.println(subbers);
+				
 				pw.println(name);
 				pw.println(id);
 				pw.println(creator);
@@ -273,49 +261,66 @@ public class allWorkoutsPersistence implements filePersistence {
 				pw.println("");
 				
 			}
-			System.out.println("Workout added to file");
+			System.out.println("Workout added to file.");
 			scan.close();
 			pw.flush();
 			pw.close();
-			File dump = new File(file);
+			File dump = new File("src/main/java/persistence/allworkouts.txt");
 			newFile.renameTo(dump);
 		}
 		catch (Exception e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+			e.printStackTrace();
+            System.err.println("Error: file "+ file + "could not be opened for writing.");
             System.exit(1);
         }
 	}
-
 	
-	public static void main(String[] args) {
-		String file = "src/main/java/persistence/allworkouts.txt";
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
-		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile anoj = new Userprofile("Francin", "Vincent",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile kavu = new Userprofile("Kavusikan", "Sivasub",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		List<Userprofile>trainers = Arrays.asList(anoj,kavu);
-		List<String> category1 = Arrays.asList("push", "pull");
-		List<String> category2 = Arrays.asList("legs", "cardio");
-		Workout workout = new Workout(kevinco,"død",
-				7, gainz, "02-02-21",
-				"Strength",category1,"1-2" ,
-				"Du skal svette",trainers);
-		Workout workout2 = new Workout(anoj,"RIP",
-				5, gainz, "04-02-21",
-				"Strength",category2,"1-2" ,
-				"Du skal svette");
-		Collection<Workout>workouts = Arrays.asList(workout);
-		allWorkoutsPersistence wp = new allWorkoutsPersistence(file,workouts);
-		wp.writeFile();
-		wp.readFile(file);
-		wp.addWorkoutToFile(file, workout2);
+	
+	//Method for finding workouts that this.user are subbed to.
+	public List<String> findSubbedWorkout(String subber) {
+		Scanner scanner;
+		System.out.println("Trying to find workouts "+subber+" has subbed on");
+		try
+        {
+            scanner = new Scanner(new FileReader(file));
+            
+            int lineNum = 0;
+            String line="";
+            while(scanner.hasNextLine()) {	
+            	String name = scanner.nextLine();
+            	if (name.equals("")) {
+					name = scanner.nextLine();
+					if (name.equals("]")) {
+						break;
+					}
+            	}
+            	for (int i = 0; i<10; i++) {
+            		String check = scanner.nextLine();
+            		String splits[] = check.split(":");
+            		if (splits[0].equals("Users using your workout")) {
+            			String split = splits[1].substring(2,splits[1].length()-1);
+            			String subbers[] = split.split(", ");
+            			for (int j = 0; j<subbers.length;j++) {
+            				if (subbers[j].equals(subber)) {
+            					String nameParts[] = name.split(": ");
+            					workoutsSubbedOn.add(nameParts[1]);
+            				}
+            			}
+            		}
+            	}
+            	}
+            System.out.println("All workouts found.");
+            return workoutsSubbedOn;
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Error, not able to find subbers.");
+            System.exit(1);
+        }
+		return workoutsSubbedOn;	
 	}
 
 }
+
+

@@ -5,12 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-import core.Workout;
 
 public class Userprofile{
 
+	//Variables
 	private String firstName;
 	private String lastName;
 	private LocalDate birthday;
@@ -20,60 +19,44 @@ public class Userprofile{
 	private String email;
 	private String password;
 	private Collection<Workout>myWorkouts = new ArrayList<Workout>();
-	private List<String> allWorkouts = new ArrayList<String>();
 	
+	
+	//Constructors
 	public Userprofile() {
 		
 	}
-	
 	public Userprofile(String firstName, String lastName, String email, String password,
-		LocalDate birthday, char gender) {	
+		String birthday, char gender) {	
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.birthday = birthday;
+		this.birthday = LocalDate.parse(birthday, formatter);
 		this.gender = gender;
-		
+		 
 	}
 	
 	public Userprofile(String firstName, String lastName, String email, String password,
-			LocalDate birthday, char gender, Collection<Workout> myWorkout) {
+			String birthday, char gender, Collection<Workout> myWorkout) {
 		this(firstName, lastName, email, password, birthday, gender);
 		this.myWorkouts=myWorkout;
 	}
 	
-	public Userprofile(String firstName, String lastName, String email, String password, String birthday,
-			char gender) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.birthday = LocalDate.parse(birthday, formatter);
-		this.gender = gender;
-		
-	}
-
-	public Userprofile(String firstName, String lastName, String email, String password, String birthday,
-			char gender, List<String> allWorkouts) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-		this.birthday = LocalDate.parse(birthday, formatter);
-		this.gender = gender;
-		this.allWorkouts = allWorkouts;
-	}
-
+	
+	//Getters and setters
 	public String getName() {
 		return firstName + " " + lastName;
 	}
 	
+	public String getfirstName() {
+		return firstName;
+	}
+	
+	public String getlastName() {
+		return lastName;
+	}
 	public void setFirstName(String firstname) {
 		if(!isValidName(firstname)) {
 			throw new IllegalArgumentException("Ugyldig navn");
@@ -88,13 +71,9 @@ public class Userprofile{
 		this.lastName=lastName;
 	}
 	
-	private boolean isValidName(String name) {
-		if (name.length()>=1 && name.matches("[a-zA-Z]+")) {
-			return true;
-		}
-		return false;
+	public String getEmail() {
+		return email;
 	}
-	
 	public void setEmail(String email) {
 		if (isValidEmail(email)) {
 			this.email=email;
@@ -104,22 +83,11 @@ public class Userprofile{
 		}
 	}
 	
-	private boolean isValidEmail(String email) {
-		if (email.contains("@") && email.contains(".")) {
-			return true;
-		}
-		return false;
-	}
-	
-	public String getEmail() {
-		return email;
-	}
-	
-	private String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 	
-	private void setPassword(String password) {
+	public void setPassword(String password) {
 		if (password.length()>8 && password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")) {
 			this.password = password;
 		}
@@ -156,45 +124,60 @@ public class Userprofile{
 		return myWorkouts;
 	}
 
+	
+	//Method for adding workout
 	public void addMyWorkouts(Workout workout) {
 		myWorkouts.add(workout);
 	}
 	
+	
+	//Method for deleting workout
 	public void deleteWorkout(Workout workout) {
 		myWorkouts.remove(workout);
 	}
 	
+	
+	//Validation methods for setters
+	private boolean isValidName(String name) {
+		if (name.length()>=1 && name.matches("[a-zA-Z]+")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isValidEmail(String email) {
+		if (email.contains("@") && !email.substring(0, 1).equals("@")) {
+			String[] parts = email.split("@");
+			if(parts.length==2 ) {
+				if (parts[1].contains(".") && !parts[1].substring(0,1).equals(".")
+						&& !parts[0].contains(".")) {
+					String[] parts2 = parts[1].split("\\.");
+					if(parts2.length==2) {
+						return true;
+					}	
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	//toString method
+	//This method defines how the persistnece class writes to file
 	public String toString() {
 		List<String> workoutNames = new ArrayList<String>();
 		for (Workout workout : myWorkouts) {
 			workoutNames.add(workout.getName());
 		}
-		return "Navn: " + firstName + " " +lastName + "\n" 
+		return "Navn: " + firstName +" " +lastName + "\n" 
 				+ "birthday: "+ birthday + "\n" 
 				+ "gender: " + gender + "\n"
 				+ "email: " + email + "\n"
-				+ "password: " + password + "\n"
+				+ "password: " + password + "\n" 
 				+ "Workouts: " + workoutNames + "\n\n";
 	}
 	
-	public static void main(String[] args) {
-		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevinco@ntnu.no","123","15/04/1998"
-				,'M');
-		Userprofile anoj = new Userprofile("Francin", "Vincent",
-				"francin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile kavu = new Userprofile("Kavusikan", "Sivasub",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		List<Userprofile>trainers = Arrays.asList(anoj,kavu);
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
-		Workout workout = new Workout(kevinco,"død",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette", trainers);
-		System.out.println(kevinco);
-		kevinco.addMyWorkouts(workout);
-		System.out.println(kevinco);
-	}
- }
+	
+	
+}
+

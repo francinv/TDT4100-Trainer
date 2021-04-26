@@ -7,23 +7,20 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 import java.util.Scanner;
 
-import core.Userprofile;
 import core.Workout;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class WorkoutPersistence implements filePersistence{
 	
+	//Variables
 	private Workout workout;
 	private String file;
 	public ArrayList<String> workoutlist = new ArrayList<String>();
 	
-	//"src/main/java/workoutplanner/persistence/workout.txt"
 	
+	//Constructors
 	public WorkoutPersistence() {
 	}
 	
@@ -32,6 +29,8 @@ public class WorkoutPersistence implements filePersistence{
 		this.file = file;
 	}
 
+	
+	//Method for reading file
 	@Override
 	public void readFile(String file) {
 		Scanner in;
@@ -49,31 +48,33 @@ public class WorkoutPersistence implements filePersistence{
         }
         catch (FileNotFoundException e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened. Does it exist?");
+            System.err.println("Error: file " + file +  "could not be opened. Does it exist?");
             System.exit(1);
         }
 		
 	}
 
+	//Method for writing to file 
 	@Override
 	public void writeFile() {
-		System.out.println("Trying");
+		System.out.println("Trying to write file");
 		  try
 	        {
 	            PrintWriter outFile = new PrintWriter("src/main/java/persistence/workout.txt");
 	            outFile.println(workout);
 	            outFile.close();
-	            System.out.println("Done");
+	            System.out.println("Writing finished");
 	        }
 	        catch (FileNotFoundException e)
 	        {
-	            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+	            System.err.println("Error: file " + file + "could not be opened for writing.");
 	            System.exit(1);
 	        }
 	}
 
+	//This method updates the workout textfile with the subbers who have subbed on a specific workout
 	@Override
-	public void updateFile(String File, String wantedID, List<String> allSubs ) {
+	public void updateFile(String File, String wantedID, Collection<String> allSubs ) {
 		System.out.println("Trying to update file");
 		String tempFile = "src/main/java/persistence/workoutTemp.txt";
 		File oldFile = new File(file);
@@ -86,32 +87,22 @@ public class WorkoutPersistence implements filePersistence{
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			Scanner scan = new Scanner(new File(file));
-			//scan.useDelimiter("\n");
 
 			while(scan.hasNext()) {
 				name = scan.nextLine();
-				System.out.println(name);
 				id = scan.nextLine();
-				System.out.println(id);
 				creator = scan.nextLine();
-				System.out.println(creator);
 				when = scan.nextLine();
-				System.out.println(when);
 				duration = scan.nextLine();
-				System.out.println(duration);
 				type = scan.nextLine();
-				System.out.println(type);
 				category = scan.nextLine();
 				muscles = scan.nextLine();
 				excercises = scan.nextLine();
 				description = scan.nextLine();
 				subbers = scan.nextLine();
-				System.out.println(subbers);
 				String id2 = id.substring(12);
-				System.out.println(id2);
-
+				
 				if(id2.equals(wantedID)) {
-					System.out.println("derp");
 					pw.println(name);
 					pw.println(id);
 					pw.println(creator);
@@ -148,11 +139,13 @@ public class WorkoutPersistence implements filePersistence{
 		}
 		catch (Exception e)
         {
-            System.err.println("Error: file 'test.txt' could not be opened for writing.");
+            System.err.println("Error: file " + file + "could not be opened for writing.");
             System.exit(1);
         }
 	}
 
+	
+	//This method finds all subbers subbed on a specific workout
 	public void findSubbs(String file) {
 		Scanner scanner;
         try
@@ -171,35 +164,10 @@ public class WorkoutPersistence implements filePersistence{
         }
         catch (FileNotFoundException e)
         {
-            System.err.println("Error: file could not be read. Does it exist?");
+            System.err.println("Error: " + file + "could not be read. Does it exist?");
             System.exit(1);
         }
 
-	}
-
-
-
-	
-	public static void main(String[] args) {
-		String file = "src/main/java/persistence/workout.txt";
-		List<String> gainz = Arrays.asList("chest", "triceps","shoulders");
-		Userprofile kevinco = new Userprofile("Kevin", "Cornolis",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile anoj = new Userprofile("Francin", "Vincent",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		Userprofile kavu = new Userprofile("Kavusikan", "Sivasub",
-				"kevin@mail.com","1234","15/04/1998"
-				,'M');
-		List<Userprofile>trainers = Arrays.asList(anoj,kavu);
-		Workout workout = new Workout(kevinco,"død",
-				7, gainz, "02-02-21",
-				"Strength","push",2 ,
-				"Du skal svette",trainers);
-		WorkoutPersistence wp = new WorkoutPersistence(workout, file);
-		wp.writeFile();
-		wp.readFile(file);
 	}
 
 }
